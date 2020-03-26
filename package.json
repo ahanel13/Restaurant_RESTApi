@@ -1,0 +1,22 @@
+{
+  "name": "restaurant_restapi",
+  "version": "1.0.0",
+  "description": "This is the server that holds all the endpoints for our applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahanel13/Restaurant_RESTApi.git"
+  },
+  "author": "Anthony Hanel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahanel13/Restaurant_RESTApi/issues"
+  },
+  "homepage": "https://github.com/ahanel13/Restaurant_RESTApi#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
