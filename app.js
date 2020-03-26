@@ -18,6 +18,7 @@ const userRoutes = require('./api/routes/user');
 /*  
 Requests sent to these urls will be sent to the routes provided that
 were imported at the beginning. Middleware */
+app.get('/favicon.ico', (req, res) => res.status(200));
 app.use('/comps', compsRoutes);
 app.use('/employees', employeesRoutes);
 app.use('/ingredients', ingredientsRoutes);
