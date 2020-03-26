@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 //const morgan = require('morgan');
 
 //adding headers to avoid CORS errors
@@ -31,6 +32,15 @@ const userRoutes = require('./api/routes/user');
 
 //logs requests in terminal only in development
 //app.use(morgan('dev'));
+
+mongoose.connect('mongodb+srv://admin:adminadmin@node-rest-shop-wzkfd.mongodb.net/test?retryWrites=true&w=majority',
+{ 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true,
+    useCreateIndex: true
+});
+//this if for deprecation warnings
+mongoose.Promise = global.Promise;
 
 //allows the parsing of json data
 app.use(bodyParser.urlencoded({extended: false}));
