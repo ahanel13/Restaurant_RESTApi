@@ -2,7 +2,7 @@
   "name": "restaurant_restapi",
   "version": "1.0.0",
   "description": "This is the server that holds all the endpoints for our applications",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
