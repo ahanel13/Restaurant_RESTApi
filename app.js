@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const morgan = require('morgan');
+//const morgan = require('morgan');
 
 //importing the routes
 const compsRoutes = require('./api/routes/comps');
@@ -13,7 +13,7 @@ const timeClockRoutes = require('./api/routes/timeClock');
 const userRoutes = require('./api/routes/user');
 
 //logs requests in terminal only in development
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 
 /*  
 Requests sent to these urls will be sent to the routes provided that
