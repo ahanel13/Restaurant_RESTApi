@@ -4,7 +4,7 @@
   "description": "This is the server that holds all the endpoints for our applications",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
