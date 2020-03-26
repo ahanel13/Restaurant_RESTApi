@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 //const morgan = require('morgan');
 
 //importing the routes
@@ -14,6 +15,10 @@ const userRoutes = require('./api/routes/user');
 
 //logs requests in terminal only in development
 //app.use(morgan('dev'));
+
+//allows the parsing of json data
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 /*  
 Requests sent to these urls will be sent to the routes provided that

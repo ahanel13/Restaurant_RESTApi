@@ -7,9 +7,22 @@ router.get('/', (req, res, next) => {
     });
 });
 
+//GET https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients/{ingredientId}
+router.get('/:ingredientId', (req, res, next) => {
+    const id = req.params.ingredientId;
+    res.status(200).json({
+        message: 'This endpoint is handling GET request for ingredients'
+    });
+});
+
 router.post('/', (req, res, next) => {
+    const ingredient = {
+        name: req.body.name,
+        quantity: req.body.quantity
+    };
+    console.log(ingredient);
     res.status(201).json({
-        message: 'This endpoint is handling POST request for ingredients'
+        message: 'Ingredient was added to the database'
     });
 });
 
