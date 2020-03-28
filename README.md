@@ -1,8 +1,7 @@
 # Restaurant_RESTApi
 * [HTTP Verbs](#http-verbs)
 * [Error handling](#error-handling)
-* [Record limits](#record-limits)
-* [Request & Response Examples](#request--response-examples)
+* [Request & Response Examples](#all-endpoints-and-request/reponse-examples)
 
 
 ## HTTP Verbs
@@ -25,48 +24,15 @@ There are generally three common response codes indicating (1) success, (2) fail
 * 400s - Bad Request
 * 500s - Internal Server Error
 
+## All Endpoints and Request/Reponse Examples
 
-## Record limits
-
-* If no limit is specified, return results with a default limit.
-* To get records 51 through 75 do this:
-    * http://example.gov/magazines?limit=25&offset=50
-    * offset=50 means, ‘skip the first 50 records’
-    * limit=25 means, ‘return a maximum of 25 records’
-
-Information about record limits and total available count should also be included in the response. Example:
-
-    {
-        "metadata": {
-            "resultset": {
-                "offset": 25,
-                "limit": 25
-            }
-        },
-        "results": []
-    }
-
-## Request & Response Examples
-
-### API Resources
-
-  - [GET /magazines](#get-magazines)
-  - [GET /magazines/[id]](#get-magazinesid)
-  - [POST /magazines/[id]/articles](#post-magazinesidarticles)
-
-### GET /magazines
+### /ingredients
 
 Example: http://example.gov/api/v1/magazines.json
 
 Response body:
 
     {
-        "metadata": {
-            "resultset": {
-                "offset": 0,
-                "limit": 10
-            }
-        },
         "results": [
             {
                 "id": "1234",
@@ -100,7 +66,7 @@ Response body:
         ]
     }
 
-### GET /magazines/[id]
+### /user
 
 Example: http://example.gov/api/v1/magazines/[id].json
 
@@ -119,7 +85,7 @@ Response body:
 
 
 
-### POST /magazines/[id]/articles
+### /menuItems
 
 Example: Create – POST  http://example.gov/api/v1/magazines/[id]/articles
 
@@ -137,3 +103,15 @@ Request body:
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ante ut augue scelerisque ornare. Aliquam tempus rhoncus quam vel luctus. Sed scelerisque fermentum fringilla. Suspendisse tincidunt nisl a metus feugiat vitae vestibulum enim vulputate. Quisque vehicula dictum elit, vitae cursus libero auctor sed. Vestibulum fermentum elementum nunc. Proin aliquam erat in turpis vehicula sit amet tristique lorem blandit. Nam augue est, bibendum et ultrices non, interdum in est. Quisque gravida orci lobortis... "
         }
     ]
+
+### /user
+
+### /tables
+
+### /orders
+
+### /employees
+
+### /notifications
+
+### /timeClock
