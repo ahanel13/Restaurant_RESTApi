@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
+
+const MenuItem = require('../models/menuItem');
 
 router.get('/', (req, res, next) => {
     res.status(200).json({
@@ -8,8 +11,20 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    res.status(201).json({
-        message: 'This endpoint is handling POST request for menuItems'
+    //creating mongoose model menuItem
+    const menuItem = new MenuItem({
+        _id: new mongoose.Types.Object(),
+        ingredients: req.body.ingredients,
+        name: req.body.name,
+        picture: req.body.picture,
+        desctription: req.body.desctription,
+        price: req.body.price,
+        nutrition: req.body.nutrition,
+        item_type: req.body.item_type,
+        category: req.body.category,
+        paid: req.body.paid,
+        special_instruct: req.body.instruct
+
     });
 });
 
