@@ -32,7 +32,8 @@ Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients
 
 #### GET Request
 Response body:
-    {
+    
+    [
         {
     "doc": [
         {
@@ -71,12 +72,13 @@ Response body:
         }
         ]
     }
-    }
+    ]
 
 For a single ingredient send request to /ingredients/{ingredient_id}    
 
 #### POST Request
 Request body:
+    
     [
         {
             "name": "Some ingredient name",
@@ -87,6 +89,7 @@ Request body:
 #### PATCH Request
 Send request to /ingredients/{ingredient_id}    
 Request body:
+    
     [
         [
             {"propName": "name", "value": "Some other name"},
@@ -96,6 +99,7 @@ Request body:
 
 #### DELETE Request  
 Request body:
+    
     [
         {"_id": "5e7fd823a3ba2c0004dda62a"}
     ]
