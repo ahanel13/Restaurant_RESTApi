@@ -79,30 +79,26 @@ For a single ingredient send request to /ingredients/{ingredient_id}
 #### POST Request
 Request body:
     
-    [
         {
             "name": "Some ingredient name",
             "quantity": "12" 
         }
-    ]
 
 #### PATCH Request
 Send request to /ingredients/{ingredient_id}    
 Request body:
     
     [
-        [
-            {"propName": "name", "value": "Some other name"},
-            {"propName": "quantity", "value": "15"},
-        ]
+        {"propName": "name", "value": "Some other name"},
+        {"propName": "quantity", "value": "15"},
     ]
 
 #### DELETE Request  
 Request body:
     
-    [
-        {"_id": "5e7fd823a3ba2c0004dda62a"}
-    ]
+    {
+        "_id": "5e7fd823a3ba2c0004dda62a"
+    }
 
 ### /user
 
