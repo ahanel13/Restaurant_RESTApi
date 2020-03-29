@@ -185,42 +185,52 @@ Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/menuItems
 Response body:
     
     {
-    "doc": [
+    "menuItems": [
         {
-            "_id": "5e7e68fc188294181cad7dec",
-            "name": "carrots",
-            "quantity": 254,
+            "ingredients": [
+                {
+                    "_id": "5e7fd964a3ba2c0004dda62c",
+                    "name": "Potatos"
+                },
+                {
+                    "_id": "5e7fa943016004000436733c",
+                    "name": "steak"
+                }
+            ],
+            "_id": "5e80333bc4d4630d9c47c799",
+            "name": "Serlion and ",
+            "picture": "This will be a picture",
+            "desctription": "This is a steak and some potatoes",
+            "price": 29.99,
+            "nutrition": "Meat, caloires",
+            "item_type": "Steak",
+            "category": "Entree",
+            "paid": false,
             "__v": 0
         },
         {
-            "_id": "5e7fa943016004000436733c",
-            "name": "steak",
-            "quantity": 69,
-            "__v": 0
-        },
-        {
-            "_id": "5e7faa3e016004000436733d",
-            "name": "eggs",
-            "quantity": 43,
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd823a3ba2c0004dda62a",
-            "name": "Lettuce",
-            "quantity": 23,
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd8f8a3ba2c0004dda62b",
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd964a3ba2c0004dda62c",
-            "name": "Potatos",
-            "quantity": 19,
+            "ingredients": [
+                {
+                    "_id": "5e7faa3e016004000436733d",
+                    "name": "eggs"
+                },
+                {
+                    "_id": "5e7fa943016004000436733c",
+                    "name": "steak"
+                }
+            ],
+            "_id": "5e803477bef467215ca98b9d",
+            "name": "Steak and eggs ",
+            "picture": "This will be a picture",
+            "desctription": "This is a steak and some potatoes",
+            "price": 29.99,
+            "nutrition": "Meat, caloires",
+            "item_type": "Steak",
+            "category": "Entree",
+            "paid": false,
             "__v": 0
         }
-        ]
+    ]
     }
 
 For a single ingredient send request to /ingredients/{ingredient_id}    
@@ -229,8 +239,19 @@ For a single ingredient send request to /ingredients/{ingredient_id}
 Request body:
     
     {
-        "name": "Some ingredient name",
-        "quantity": "12" 
+    	"ingredients": [
+    		{"_id": "5e7faa3e016004000436733d"},
+    		{"_id": "5e7fa943016004000436733c"}
+    		],
+        "name": "Steak and eggs " ,
+        "picture": "This will be a picture" ,
+        "desctription": "This is a steak and some potatoes",
+        "price": "29.99",
+        "nutrition": "Meat, caloires" ,
+        "item_type": "Steak" ,
+        "category": "Entree",
+        "paid": "0",
+        "special_instruct": "I want this to be medium-well" 
     }
 
 #### PATCH Request
@@ -245,9 +266,7 @@ Request body:
 #### DELETE Request  
 Request body:
     
-    {
-        "_id": "5e7fd823a3ba2c0004dda62a"
-    }
+
 
 
 ### /user
@@ -301,8 +320,11 @@ For a single ingredient send request to /ingredients/{ingredient_id}
 Request body:
     
     {
-        "name": "Some ingredient name",
-        "quantity": "12" 
+	    "first_name": "John",
+        "last_name": "Smith",
+        "email": "JohnSmith01@gmail.com",
+        "password": "johnysmithy",
+        "birthday": "1971-09-22T00:00:00Z"
     }
 
 #### PATCH Request
