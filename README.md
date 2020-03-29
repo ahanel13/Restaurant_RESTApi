@@ -2,14 +2,14 @@
 * [HTTP Verbs](#http-verbs)
 * [Error handling](#error-handling)
 * [Request & Response Examples](#all-endpoints-and-request/reponse-examples)
-- [Comps](#/comps)
-- [Employees](#/employees)
-- [Ingredients](#/ingredients)
-- [MenuItems](#menuItems)
-- [Notifications](#/notifications)
-- [Orders](#/orders)
-- [TimeClock](#/timeClock)
-- [Users](#/user)
+    * [Comps](#comps)
+    * [Employees](#employees)
+    * [Ingredients](#ingredients)
+    * [MenuItems](#menuItems)
+    * [Notifications](#notifications)
+    * [Orders](#orders)
+    * [TimeClock](#timeClock)
+    * [Users](#user)
 
 ## HTTP Verbs
 
