@@ -3,8 +3,12 @@ const mongoose = require('mongoose');
 //Creating a item schema
 const orderSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    employee_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee', required: true }, // FIXME: 
-    menuItem_id: { type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', required: true }
+    menutItems:  [
+        {type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', required: true }
+    ], 
+    send_to_kitchen: { type: Boolean, defualt: false},
+    time_created: Date,
+    time_completed: Date
 });
 
 module.exports = mongoose.model('Order', orderSchema);
