@@ -7,8 +7,9 @@ const orderSchema = mongoose.Schema({
         {type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', required: true }
     ], 
     send_to_kitchen: { type: Boolean, defualt: false},
-    time_created: Date,
     time_completed: Date
-});
+},
+    {timestamps: true}
+);
 
 module.exports = mongoose.model('Order', orderSchema);
