@@ -6,15 +6,15 @@ const menuItemSchema = mongoose.Schema({
     ingredients: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient', required: true }
     ],
-    name: String,
+    name: { type: String, required: true},
     picture: String,
-    desctription: String,
-    price: Number,
-    nutrition: String,
-    item_type: String,
-    category: String,
-    paid: Boolean,
-    special_instruct: String
+    desctription: { type: String, required: true},
+    price: { type: Number, required: true},
+    nutrition: { type: String, required: true},
+    item_type: { type: String, required: true},
+    category: { type: String, required: true},
+    paid: { type: Boolean, defualt: false},    
+    special_instruct: { type:String, defualt: "No intructions provided."}
 });
 
 module.exports = mongoose.model('MenuItem', menuItemSchema);
