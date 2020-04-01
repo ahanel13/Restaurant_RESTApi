@@ -29,7 +29,7 @@ router.post('/', (req, res, next) => {
         ingredients: req.body.ingredients,
         name: req.body.name,
         picture: req.body.picture,
-        desctription: req.body.desctription,
+        description : req.body.description ,
         price: req.body.price,
         nutrition: req.body.nutrition,
         item_type: req.body.item_type,
