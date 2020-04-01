@@ -6,8 +6,9 @@ const tableSchema = mongoose.Schema({
     user_ids: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
     ],
-    employee_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee'}, 
+    table_number: {type: String, required: true},
+    employee_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee', required: true}, 
     order_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Order'}
 });
 
-module.exports = mongoose.model('Table', shiftSchema);
+module.exports = mongoose.model('Table', tableSchema);
