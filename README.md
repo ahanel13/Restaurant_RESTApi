@@ -35,59 +35,17 @@ There are generally three common response codes indicating (1) success, (2) fail
 ## Endpoints and Request/Reponse Examples
 
 ### /comps
-Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/comps
 
 #### GET Request
 Response body:
     
-    {
-    "doc": [
-        {
-            "_id": "5e7e68fc188294181cad7dec",
-            "name": "carrots",
-            "quantity": 254,
-            "__v": 0
-        },
-        {
-            "_id": "5e7fa943016004000436733c",
-            "name": "steak",
-            "quantity": 69,
-            "__v": 0
-        },
-        {
-            "_id": "5e7faa3e016004000436733d",
-            "name": "eggs",
-            "quantity": 43,
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd823a3ba2c0004dda62a",
-            "name": "Lettuce",
-            "quantity": 23,
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd8f8a3ba2c0004dda62b",
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd964a3ba2c0004dda62c",
-            "name": "Potatos",
-            "quantity": 19,
-            "__v": 0
-        }
-        ]
-    }
 
-For a single ingredient send request to /ingredients/{ingredient_id}    
+For a single comp send request to /comps/{comps_id}    
 
 #### POST Request
 Request body:
     
-    {
-        "name": "Some ingredient name",
-        "quantity": "12" 
-    }
 
 #### PATCH Request
 Send request to /ingredients/{ingredient_id}    
@@ -100,10 +58,6 @@ Request body:
 
 #### DELETE Request  
 Request body:
-    
-    {
-        "_id": "5e7fd823a3ba2c0004dda62a"
-    }
 
 
 ### /ingredients
@@ -127,28 +81,6 @@ Response body:
             "quantity": 69,
             "__v": 0
         },
-        {
-            "_id": "5e7faa3e016004000436733d",
-            "name": "eggs",
-            "quantity": 43,
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd823a3ba2c0004dda62a",
-            "name": "Lettuce",
-            "quantity": 23,
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd8f8a3ba2c0004dda62b",
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd964a3ba2c0004dda62c",
-            "name": "Potatos",
-            "quantity": 19,
-            "__v": 0
-        }
         ]
     }
 
@@ -174,10 +106,6 @@ Request body:
 #### DELETE Request  
 Request body:
     
-    {
-        "_id": "5e7fd823a3ba2c0004dda62a"
-    }
-
 
 ### /menuItems
 Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/menuItems
@@ -234,7 +162,7 @@ Response body:
     ]
     }
 
-For a single ingredient send request to /ingredients/{ingredient_id}    
+For a single menuItem send request to /menuItems/{menuItem_id}    
 
 #### POST Request
 Request body:
@@ -256,7 +184,7 @@ Request body:
     }
 
 #### PATCH Request
-Send request to /ingredients/{ingredient_id}    
+Send request to /menuItems/{menuItem_id}    
 Request body:
     
     [
@@ -271,51 +199,26 @@ Request body:
 
 
 ### /user
-Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/user
 
 #### GET Request
 Response body:
     
     {
-    "doc": [
-        {
-            "_id": "5e7e68fc188294181cad7dec",
-            "name": "carrots",
-            "quantity": 254,
-            "__v": 0
-        },
-        {
-            "_id": "5e7fa943016004000436733c",
-            "name": "steak",
-            "quantity": 69,
-            "__v": 0
-        },
-        {
-            "_id": "5e7faa3e016004000436733d",
-            "name": "eggs",
-            "quantity": 43,
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd823a3ba2c0004dda62a",
-            "name": "Lettuce",
-            "quantity": 23,
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd8f8a3ba2c0004dda62b",
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd964a3ba2c0004dda62c",
-            "name": "Potatos",
-            "quantity": 19,
-            "__v": 0
-        }
+        "users": [
+            {
+                "_id": "5e7fb9268cdb75342c869e87",
+                "first_name": "John",
+                "last_name": "Smith",
+                "email": "JohnSmith01@gmail.com",
+                "password": "$2b$10$tuENl1R6wJbPvYUsat5.6ulKNBk7NHbXnBx93OlypmjF49fKASMBa",
+                "birthday": "1971-09-22T00:00:00.000Z",
+                "__v": 0
+            }
         ]
     }
 
-For a single ingredient send request to /ingredients/{ingredient_id}    
+For a single user send request to /user/{user_id}    
 
 #### POST Request
 Request body:
@@ -329,7 +232,7 @@ Request body:
     }
 
 #### PATCH Request
-Send request to /ingredients/{ingredient_id}    
+Send request to /user/{user_id}     
 Request body:
     
     [
@@ -338,15 +241,11 @@ Request body:
     ]
 
 #### DELETE Request  
-Request body:
-    
-    {
-        "_id": "5e7fd823a3ba2c0004dda62a"
-    }
+
 
 
 ### /tables
-Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/tables
 
 #### GET Request
 Response body:
@@ -362,7 +261,7 @@ Response body:
         ]
     }
 
-For a single ingredient send request to /ingredients/{ingredient_id}    
+For a single table send request to /tables/{table_id}    
 
 #### POST Request
 Request body:
@@ -375,7 +274,7 @@ Request body:
     }
 
 #### PATCH Request
-Send request to /ingredients/{ingredient_id}    
+Send request to /tables/{table_id}    
 Request body:
     
     [
@@ -389,7 +288,7 @@ Request body:
 
 
 ### /orders
-Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/orders
 
 #### GET Request
 Response body:
@@ -401,7 +300,7 @@ Request body:
     
 
 #### PATCH Request
-Send request to /ingredients/{ingredient_id}    
+Send request to /orders/{order_id}    
 Request body:
     
     [
@@ -414,7 +313,7 @@ Request body:
 
 
 ### /employees
-Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/employees
 
 #### GET Request
 Response body:
@@ -434,7 +333,7 @@ Response body:
         ]
     }
 
-For a single ingredient send request to /ingredients/{ingredient_id}    
+For a single employee send request to /employees/{employee_id}     
 
 #### POST Request
 Request body:
@@ -449,7 +348,7 @@ Request body:
     }
 
 #### PATCH Request
-Send request to /ingredients/{ingredient_id}    
+Send request to /employees/{employee_id}    
 Request body:
     
     [
@@ -461,7 +360,7 @@ Request body:
 Just send the delete request to /employess/{employeeId} where {employeeId} is replaced with an ID
 
 ### /notifications
-Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/notifications
 
 #### GET Request
 Response body:
@@ -471,7 +370,7 @@ Request body:
     
 
 #### PATCH Request
-Send request to /ingredients/{ingredient_id}    
+Send request to /notifications/{notification_id}    
 Request body:
     
     [
@@ -484,7 +383,7 @@ Request body:
 
     
 ### /timeClock
-Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/timeClock
 
 #### GET Request
 Response body:
@@ -495,7 +394,7 @@ Request body:
     
 
 #### PATCH Request
-Send request to /ingredients/{ingredient_id}    
+Send request to /timeClock/{shift_id}    
 Request body:
     
     [
