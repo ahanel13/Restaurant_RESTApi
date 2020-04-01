@@ -29,6 +29,7 @@ const notificationsRoutes = require('./api/routes/notifications');
 const ordersRoutes = require('./api/routes/orders');
 const timeClockRoutes = require('./api/routes/timeClock');
 const userRoutes = require('./api/routes/user');
+const tableRoutes = require('./api/routes/tables');
 
 //logs requests in terminal only in development
 //app.use(morgan('dev'));
@@ -57,6 +58,7 @@ app.use('/notifications', notificationsRoutes);
 app.use('/orders', ordersRoutes);
 app.use('/timeClock', timeClockRoutes);
 app.use('/user', userRoutes);
+app.use('/tables', tableRoutes);
 
 //These execute if a request was sent to a route that doesn't exeist above
 app.use((req, res, next) => {
