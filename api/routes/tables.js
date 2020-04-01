@@ -3,9 +3,11 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const Table = require('../models/table');
+const Employee = require('../models/employee');
 
 router.get('/', (req, res, next) => {
     Table.find()
+        .populate('employee', 'name position')
         .exec()
         .then(tables => {
             console.log(tables);

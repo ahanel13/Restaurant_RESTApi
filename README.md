@@ -221,6 +221,8 @@ Response body:
 For a single user send request to /user/{user_id}    
 
 #### POST Request
+https://dijkstras-steakhouse-restapi.herokuapp.com/user/signup
+
 Request body:
     
     {

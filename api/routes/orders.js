@@ -1,15 +1,31 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
+
+const MenuItem = require('../models/menuItem');
+const Order = require('../models/order');
 
 router.get('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'This endpoint is handling GET request for orders'
+    Order.find()
+    //.populate('ingredients', 'name')
+    .exec()
+    .then(Orders => {
+        console.log(Orders);
+        res.status(200).json({Orders});
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
     });
 });
 
 router.post('/', (req, res, next) => {
-    res.status(201).json({
-        message: 'This endpoint is handling POST request for orders'
+    const order = new Order({
+        _id: new mongoose.Types.ObjectId(),
+        menuItems = req.body.menuItems,
+        send_to_kitchen = req.boby.send
     });
 });
 
