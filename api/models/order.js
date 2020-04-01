@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const orderSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     menutItems:  [
-        {type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', required: true }
+        {type: menuItemSchema}
     ], 
     send_to_kitchen: { type: Boolean, defualt: false},
     time_completed: Date

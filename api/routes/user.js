@@ -70,9 +70,9 @@ router.delete('/:userId', (req, res, next) => {
 router.get('/', (req, res, next) => {
     User.find()
         .exec()
-        .then(doc => {
-            console.log(doc);
-            res.status(200).json({doc});
+        .then(users => {
+            console.log(users);
+            res.status(200).json({users});
         })
         .catch(err => {
             console.log(err);
