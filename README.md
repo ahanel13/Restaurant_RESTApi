@@ -495,41 +495,17 @@ Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients
 Response body:
     
     {
-    "doc": [
-        {
-            "_id": "5e7e68fc188294181cad7dec",
-            "name": "carrots",
-            "quantity": 254,
-            "__v": 0
-        },
-        {
-            "_id": "5e7fa943016004000436733c",
-            "name": "steak",
-            "quantity": 69,
-            "__v": 0
-        },
-        {
-            "_id": "5e7faa3e016004000436733d",
-            "name": "eggs",
-            "quantity": 43,
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd823a3ba2c0004dda62a",
-            "name": "Lettuce",
-            "quantity": 23,
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd8f8a3ba2c0004dda62b",
-            "__v": 0
-        },
-        {
-            "_id": "5e7fd964a3ba2c0004dda62c",
-            "name": "Potatos",
-            "quantity": 19,
-            "__v": 0
-        }
+        "employees": [
+            {
+                "tables": [],
+                "_id": "5e840707764c1d4504ea1fa0",
+                "first_name": "Anthony",
+                "last_name": "Hanel",
+                "email": "testemail02@gmail.com",
+                "password": "$2b$10$eJULvWZqQRanThpC8ntuJCz7w5HOzBQuxFdaLhZ1FJhSbrG9heFC",
+                "position": 1,
+                "__v": 0
+            }
         ]
     }
 
@@ -539,8 +515,12 @@ For a single ingredient send request to /ingredients/{ingredient_id}
 Request body:
     
     {
-        "name": "Some ingredient name",
-        "quantity": "12" 
+	    // list of table ideas in an array as well
+        "first_name": "Anthony",
+	    "last_name": "Hanel",
+	    "email": "testemail02@gmail.com",
+	    "password": "fakepassword",
+	    "position": "1"
     }
 
 #### PATCH Request
@@ -553,12 +533,7 @@ Request body:
     ]
 
 #### DELETE Request  
-Request body:
-    
-    {
-        "_id": "5e7fd823a3ba2c0004dda62a"
-    }
-
+Just send the delete request to /employess/{employeeId} where {employeeId} is replaced with an ID
 
 ### /notifications
 Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients
