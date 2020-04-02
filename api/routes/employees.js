@@ -6,18 +6,60 @@ const bcrypt = require('bcrypt');
 const Employee = require('../models/employee');
 
 router.get('/', (req, res, next) => {
-    Employee.find()
-        .exec()
-        .then(employees => {
-            console.log(employees);
-            res.status(200).json({employees});
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
+    if(req.body.email){
+        const email = req.body.email.toLowerCase();
+        Employee.findOne({email: email})
+            .exec()
+            .then(employee => {
+                if(employee){
+                    bcrypt.compare(req.body.password, employee.password, (err, result) => {
+                        if(err){ // if there was an error with hashing password
+                            console.log(err)
+                            return res.status(500).json({
+                                error: err
+                            });
+                        } else {
+                            console.log(result);
+                            if(result){
+                                console.log(employee);
+                                res.status(200).json({employee});
+                            } else {
+                                res.status(200).json({
+                                    message: "Inncorrect Password",
+                                });
+                            }
+
+                        }
+
+                    });
+                } else {
+                    console.log(employee);
+                    res.status(200).json({
+                        message: "Email does not exist",
+                        employee: employee
+                    });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    error: err
+                });
             });
-        });
+    } else {
+        Employee.find()
+            .exec()
+            .then(employees => {
+                console.log(employees);
+                res.status(200).json({employees});
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    error: err
+                });
+            });
+    }
 });
 
 router.get('/:employeeId', (req, res, next) => {
@@ -42,7 +84,7 @@ router.get('/:employeeId', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    Employee.find({ email: req.body.email }) //checking if email exists
+    Employee.find({ email: req.body.email.toLowerCase() }) //checking if email exists
         .exec()
         .then(employee => {
             if(employee.length >= 1){
@@ -59,7 +101,7 @@ router.post('/', (req, res, next) => {
                             _id: new mongoose.Types.ObjectId(),
                             first_name: req.body.first_name,
                             last_name: req.body.last_name,
-                            email: req.body.email,
+                            email: req.body.email.toLowerCase(),
                             password: hash,
                             position: req.body.position
                         });

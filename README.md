@@ -218,7 +218,7 @@ Response body:
         ]
     }
 
-If you want to see if a single user exists then send this to the same /user endpoint. This will either return null if a user wasn't found or the user that was found.
+If you want to see if a single user exists (for signing in) then send this to the same /user endpoint. This will either return null if a user wasn't found or the user that was found.
     
     {
         "email": "JohnSmith03@gmail.com",
@@ -403,7 +403,14 @@ Response body:
         ]
     }
 
-For a single employee send request to /employees/{employee_id}     
+If you want to see if a single employee exists (for signing in) then send this to the same /employees endpoint. This will either return null if a employee wasn't found or the employee object that was found.
+
+    {
+	    "email": "testemail02@gmail.com",
+	    "password": "password"
+    }
+
+For a single employee send request to /employees/{employee_id} 
 
 #### POST Request
 Request body:
