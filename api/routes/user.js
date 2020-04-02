@@ -7,11 +7,11 @@ const User = require('../models/user');
 
 //creating user
 router.post('/signup', (req, res, next) => {
-    User.find({ email: req.body.email }) //checking if email exists
+    User.find({ email: req.body.email.toLowerCase() }) //checking if email exists
         .exec()
         .then(user => {
             if(user.length >= 1){
-                return res.status(409).json({message: 'Email exisits'})
+                return res.status(409).json({message: 'Email already exisits'})
             } else { //Creating user here
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if(err){ // if there was an error with hashing password
@@ -51,6 +51,27 @@ router.post('/signup', (req, res, next) => {
     
 });
 
+router.patch('/:userId', (req, res, next) => {
+    const id = req.params.userId;
+    const updateOps = {};
+    for(const ops of req.body){
+        updateOps[ops.propName] = ops.value;
+    }
+
+    User.update({_id: id}, { $set: updateOps})
+        .exec()
+        .then(result =>{
+            console.log(result);
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
 router.delete('/:userId', (req, res, next) => {
     User.deleteOne({ _id: req.params.userId })
         .exec()
@@ -68,18 +89,34 @@ router.delete('/:userId', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
-    User.find()
-        .exec()
-        .then(users => {
-            console.log(users);
-            res.status(200).json({users});
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
+    if(req.body.email){
+        const email = req.body.email.toLowerCase();
+        User.findOne({email: email})
+            .exec()
+            .then(users => {
+                console.log(users);
+                res.status(200).json({users});
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    error: err
+                });
             });
-        });
+    } else {
+        User.find()
+            .exec()
+            .then(users => {
+                console.log(users);
+                res.status(200).json({users});
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    error: err
+                });
+            });
+    }
 });
 
 //This is allowing the variable router to be used in other files?
