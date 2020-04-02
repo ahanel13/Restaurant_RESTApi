@@ -257,6 +257,7 @@ Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/tables
 
 #### GET Request
 Response body:
+    
     {
         "tables": [
             {
