@@ -6,9 +6,9 @@ const bcrypt = require('bcrypt');
 const Employee = require('../models/employee');
 
 router.get('/', (req, res, next) => {
-    if(req.body.email){
-        const email = req.body.email.toLowerCase();
-        Employee.findOne({email: email})
+    if(req.body.username){
+        const username = req.body.username.toLowerCase();
+        Employee.findOne({username: username})
             .exec()
             .then(employee => {
                 if(employee){
@@ -26,6 +26,7 @@ router.get('/', (req, res, next) => {
                             } else {
                                 res.status(200).json({
                                     message: "Inncorrect Password",
+                                    employee: null
                                 });
                             }
 
@@ -35,7 +36,7 @@ router.get('/', (req, res, next) => {
                 } else {
                     console.log(employee);
                     res.status(200).json({
-                        message: "Email does not exist",
+                        message: "username does not exist",
                         employee: employee
                     });
                 }
@@ -84,11 +85,11 @@ router.get('/:employeeId', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    Employee.find({ email: req.body.email.toLowerCase() }) //checking if email exists
+    Employee.find({ username: req.body.username.toLowerCase() }) //checking if username exists
         .exec()
         .then(employee => {
             if(employee.length >= 1){
-                return res.status(409).json({message: 'Email exisits'})
+                return res.status(409).json({message: 'username exisits'})
             } else { //Creating employee here
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if(err){ // if there was an error with hashing password
@@ -101,7 +102,7 @@ router.post('/', (req, res, next) => {
                             _id: new mongoose.Types.ObjectId(),
                             first_name: req.body.first_name,
                             last_name: req.body.last_name,
-                            email: req.body.email.toLowerCase(),
+                            username: req.body.username.toLowerCase(),
                             password: hash,
                             position: req.body.position
                         });

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const notifcationSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     employee_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee', required: true }, // FIXME: 
-    location: {type: String, require: true },   //kitchen or table number
+    sender: {type: String, require: true },   //kitchen or table number
     notificationType: { type:String, required: true}
 });
 

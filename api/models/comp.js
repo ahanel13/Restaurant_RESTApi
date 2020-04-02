@@ -8,5 +8,5 @@ const compSchema = mongoose.Schema({
 },
     {timestamp: true}    
 );
-
+ 
 module.exports = mongoose.model('Comp', compSchema);
