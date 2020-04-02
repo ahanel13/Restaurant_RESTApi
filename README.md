@@ -218,7 +218,13 @@ Response body:
         ]
     }
 
-For a single user send request to /user/{user_id}    
+If you want to see if a single user exists then send this to the same /user endpoint. This will either return null if a user wasn't found or the user that was found.
+    
+    {
+    	"email": "JesusObama@yahoo.com",
+    	"password": "password123"
+    }
+
 
 #### POST Request
 https://dijkstras-steakhouse-restapi.herokuapp.com/user/signup
