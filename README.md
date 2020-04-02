@@ -8,7 +8,7 @@
     * [MenuItems](#menuItems)
     * [Notifications](#notifications)
     * [Orders](#orders)
-    * [TimeClock](#timeClock)
+    * [Shifts](#Shifts)
     * [Users](#user)
     * [Tables](#tables)
 
@@ -514,25 +514,58 @@ Request body:
 #### DELETE Request  
 Just send the delete request to /notifications/{notification_id} where {notification_id} is replaced with an ID
     
-### /timeClock
-Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/timeClock
+### /shifts
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/shifts
 
 #### GET Request
+Getting all shifts in the database
 Response body:
 
+    {
+        "shifts": [
+            {
+                "_id": "5e867421881b0d50e0bc0273",
+                "employee_id": "5e8633fa467af70368376280",
+                "clock_in": "2020-04-02T23:24:17.510Z",
+                "__v": 0
+            },
+            {
+                "_id": "5e86747f554393381872ec4a",
+                "employee_id": "5e850b90c849ed00047b4ec9",
+                "clock_in": "2020-04-02T23:25:51.756Z",
+                "__v": 0
+            }
+        ]
+    }
+
+Getting all shifts for a single employee. Send GET request with shift ID to /shifts/{shiftId} where the ID replaces {shiftIf}
 
 #### POST Request
 Request body:
     
+    {
+    	"employee_id": "5e850b90c849ed00047b4ec9"
+    }
 
 #### PATCH Request
-Send request to /timeClock/{shift_id}    
+Send request to /shifts/{shift_id}    
 Request body:
-    
+
+I had to use postmans Pre-script tab to produce the time stamp 
+
+Pre-script Tab
+
+    {
+        var current_timestamp = new Date();
+        postman.setEnvironmentVariable("current_timestamp", current_timestamp.toISOString());
+    }
+
+Patch request
+
     [
-        {"propName": "name", "value": "Some other name"},
-        {"propName": "quantity", "value": "15"},
+        {"propName": "clock_out", "value": "{{current_timestamp}}"}
     ]
+
 
 #### DELETE Request  
 Request body:
