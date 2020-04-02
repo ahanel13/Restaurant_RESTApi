@@ -295,23 +295,85 @@ Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/orders
 #### GET Request
 Response body:
 
-
+    {
+        "Orders": [
+            {
+                "_id": "5e852a47908ad93e74b040d3",
+                "menuItems": [
+                    {
+                        "ingredients": [
+                            "5e7faa3e016004000436733d",
+                            "5e7fa943016004000436733c"
+                        ],
+                        "name": "Steak and eggs ",
+                        "picture": "This will be a picture",
+                        "desctription": "This is a steak and some potatoes",
+                        "price": 29.99,
+                        "nutrition": "Meat, caloires",
+                        "item_type": "Steak",
+                        "category": "Entree",
+                        "paid": false,
+                        "special_instruct": "I want this to be medium-well"
+                    }
+                ],
+                "createdAt": "2020-04-01T23:56:55.456Z",
+                "updatedAt": "2020-04-01T23:56:55.456Z",
+                "__v": 0
+            },
+            {
+                "_id": "5e852d8680350304c823297b",
+                "menuItems": [
+                    {
+                        "ingredients": [
+                            "5e7faa3e016004000436733d",
+                            "5e7fa943016004000436733c"
+                        ],
+                        "name": "Steak and eggs ",
+                        "picture": "This will be a picture",
+                        "desctription": "This is a steak and some potatoes",
+                        "price": 29.99,
+                        "nutrition": "Meat, caloires",
+                        "item_type": "Steak",
+                        "category": "Entree",
+                        "paid": false,
+                        "special_instruct": "I want this to be medium-well"
+                    }
+                ],
+                "createdAt": "2020-04-02T00:10:46.495Z",
+                "updatedAt": "2020-04-02T00:10:46.495Z",
+                "__v": 0
+            }
+        ]
+    }
 
 #### POST Request
 Request body:
-    
+    {
+	    "menuItems": [
+	    	{
+	    		"ingredients": [
+						{"_id": "5e7faa3e016004000436733d"},
+						{"_id": "5e7fa943016004000436733c"}
+					],
+    			"name": "Steak and eggs " ,
+    			"picture": "This will be a picture" ,
+    			"desctription": "This is a steak and some potatoes",
+    			"price": "29.99",
+    			"nutrition": "Meat, caloires" ,
+    			"item_type": "Steak" ,
+    			"category": "Entree",
+    			"paid": "0",
+    			"special_instruct": "I want this to be medium-well" 	
+	    	}
+	    ]
+    }
 
 #### PATCH Request
 Send request to /orders/{order_id}    
 Request body:
-    
-    [
-        {"propName": "name", "value": "Some other name"},
-        {"propName": "quantity", "value": "15"},
-    ]
 
 #### DELETE Request  
-Request body:
+Request body
 
 
 ### /employees
