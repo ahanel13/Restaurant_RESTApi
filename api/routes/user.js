@@ -13,7 +13,7 @@ router.post('/signup', (req, res, next) => {
             if(user.length >= 1){
                 return res.status(409).json({message: 'Email already exisits'})
             } else { //Creating user here
-                bcrypt.hash(req.body.password, 10, (err, hash) => {
+                bcrypt.hash(req.body.password.plain, 10, (err, hash) => {
                     if(err){ // if there was an error with hashing password
                         console.log(err)
                         return res.status(500).json({
@@ -24,7 +24,7 @@ router.post('/signup', (req, res, next) => {
                             _id: new mongoose.Types.ObjectId(),
                             first_name: req.body.first_name,
                             last_name: req.body.last_name,
-                            email: req.body.email,
+                            email: req.body.email.toLowerCase(),
                             password: hash,
                             birthday: req.body.birthday,
                             points: req.body.points 
@@ -93,9 +93,35 @@ router.get('/', (req, res, next) => {
         const email = req.body.email.toLowerCase();
         User.findOne({email: email})
             .exec()
-            .then(users => {
-                console.log(users);
-                res.status(200).json({users});
+            .then(user => {
+                if(user){
+                    bcrypt.compare(req.body.password, user.password, (err, result) => {
+                        if(err){ // if there was an error with hashing password
+                            console.log(err)
+                            return res.status(500).json({
+                                error: err
+                            });
+                        } else {
+                            console.log(result);
+                            if(result){
+                                console.log(user);
+                                res.status(200).json({user});
+                            } else {
+                                res.status(200).json({
+                                    message: "Inncorrect Password",
+                                });
+                            }
+
+                        }
+
+                    });
+                } else {
+                    console.log(user);
+                    res.status(200).json({
+                        message: "Email does not exist",
+                        user: user
+                    });
+                }
             })
             .catch(err => {
                 console.log(err);
