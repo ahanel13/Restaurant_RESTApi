@@ -441,24 +441,77 @@ Just send the delete request to /employess/{employeeId} where {employeeId} is re
 Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/notifications
 
 #### GET Request
+Getting every notification in the database
 Response body:
 
+    {
+        "notifications": [
+            {
+                "_id": "5e8665dec524770de4b3fa5f",
+                "employee_id": "5e85f4c18017ef0004ea6f3b",
+                "sender": "Table 5",
+                "notificationType": "Refill",
+                "__v": 0
+            },
+            {
+                "_id": "5e86695aca77c23f90105f62",
+                "employee_id": "5e85f4c18017ef0004ea6f3b",
+                "sender": "Kitchen",
+                "notificationType": "Question",
+                "__v": 0
+            },
+            {
+                "_id": "5e866a6bca77c23f90105f63",
+                "employee_id": "5e8633fa467af70368376280",
+                "sender": "Table2",
+                "notificationType": "Help",
+                "__v": 0
+            }
+        ]
+    }
+
+Getting everynotification for a specific employee. Send get request to /notifications/{employee_id} and replace the {employee_id} with a valid ID of an employee
+Response body:
+
+    {
+        "notifications": [
+            {
+                "_id": "5e8665dec524770de4b3fa5f",
+                "employee_id": "5e85f4c18017ef0004ea6f3b",
+                "sender": "Table 5",
+                "notificationType": "Refill",
+                "__v": 0
+            },
+            {
+                "_id": "5e86695aca77c23f90105f62",
+                "employee_id": "5e85f4c18017ef0004ea6f3b",
+                "sender": "Kitchen",
+                "notificationType": "Question",
+                "__v": 0
+            }
+        ]
+    }
+    
 #### POST Request
 Request body:
-    
+   
+    {
+	    "employee_id": "5e85f4c18017ef0004ea6f3b",
+	    "sender": "Kitchen",
+	    "notificationType": "Question"
+    }
 
 #### PATCH Request
 Send request to /notifications/{notification_id}    
 Request body:
     
     [
-        {"propName": "name", "value": "Some other name"},
-        {"propName": "quantity", "value": "15"},
+    	{"propName":"sender", "value":"Table 5"},
+    	{"propName":"notificationType", "value":"Refill"}
     ]
 
 #### DELETE Request  
-Request body:
-
+Just send the delete request to /notifications/{notification_id} where {notification_id} is replaced with an ID
     
 ### /timeClock
 Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/timeClock
