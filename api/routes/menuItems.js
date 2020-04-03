@@ -34,6 +34,7 @@ router.post('/', (req, res, next) => {
         nutrition: req.body.nutrition,
         item_type: req.body.item_type,
         category: req.body.category,
+        prepared: req.body.prepared,
         paid: req.body.paid,
         special_instruct: req.body.instruct
 

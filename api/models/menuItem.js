@@ -13,6 +13,7 @@ const menuItemSchema = mongoose.Schema({
     nutrition: { type: String, required: true},
     item_type: { type: String, required: true},
     category: { type: String, required: true},
+    prepared: {type: Boolean, defualt: false},
     paid: { type: Boolean, defualt: false},    
     special_instruct: { type:String, defualt: "No intructions provided."}
 });

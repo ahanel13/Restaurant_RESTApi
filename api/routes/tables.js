@@ -7,7 +7,7 @@ const Employee = require('../models/employee');
 
 router.get('/', (req, res, next) => {
     Table.find()
-        .populate('employee', 'name position')
+        .populate('order_id')
         .exec()
         .then(tables => {
             console.log(tables);
