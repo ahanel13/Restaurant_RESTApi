@@ -39,21 +39,46 @@ Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/comps
 
 #### GET Request
 Response body:
-    
 
-For a single comp send request to /comps/{comps_id}    
+    {
+        "comps": [
+            {
+                "_id": "5e8695b0cb2a6e3de83a7321",
+                "employee_id": "5e8633fa467af70368376280",
+                "menuItem_id": "5e8660d161b17c0004e46c8a",
+                "createdAt": "2020-04-03T01:47:28.470Z",
+                "updatedAt": "2020-04-03T01:50:12.273Z",
+                "__v": 0
+            },
+            {
+                "_id": "5e8696a130bee63bacf02722",
+                "employee_id": "5e850b90c849ed00047b4ec9",
+                "menuItem_id": "5e850b90c849ed00047b4ec9",
+                "createdAt": "2020-04-03T01:51:29.344Z",
+                "updatedAt": "2020-04-03T01:51:29.344Z",
+                "__v": 0
+            }
+        ]
+    }    
+
+To GET all comps for a specific employee request from /employees/{employee_id} where {employee_id} is replaced with a valid employee id
+    
 
 #### POST Request
 Request body:
     
+    {
+    	"employee_id": "5e850b90c849ed00047b4ec9",
+    	"menuItem_id": "5e865ed02eccf8000445d5f2"
+    }
 
 #### PATCH Request
 Send request to /ingredients/{ingredient_id}    
 Request body:
     
     [
-        {"propName": "name", "value": "Some other name"},
-        {"propName": "quantity", "value": "15"},
+    	{"propName":"employee_id", "value":"5e8633fa467af70368376280"},
+    	{"propName":"menuItem_id", "value":"5e8660d161b17c0004e46c8a"}
     ]
 
 #### DELETE Request  

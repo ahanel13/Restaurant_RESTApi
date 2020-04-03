@@ -6,7 +6,7 @@ const compSchema = mongoose.Schema({
     employee_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee', required: true }, 
     menuItem_id: { type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', required: true }
 },
-    {timestamp: true}    
+    {timestamps: true}    
 );
  
 module.exports = mongoose.model('Comp', compSchema);
