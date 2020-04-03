@@ -45,10 +45,25 @@ router.post('/', (req, res, next) => {
         }); 
 });
 
-router.put('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'This endpoint is handling PATCH request for orders'
-    });
+router.put('/:orderId', (req, res, next) => {
+    const id = req.params.orderId;
+    const updateOps = {};
+    for(const ops of req.body){
+        updateOps[ops.propName] = ops.value;
+    }
+
+    Order.update({_id: id}, { $set: updateOps})
+        .exec()
+        .then(result =>{
+            console.log(result);
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
 });
 
 router.delete('/:order_id', (req, res, next) => {
