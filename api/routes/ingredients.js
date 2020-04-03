@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const Ingredient = require('../models/ingredient');
 
+//GET https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients
 router.get('/', (req, res, next) => {
     Ingredient.find()
         .exec()
@@ -42,6 +43,7 @@ router.get('/:ingredientId', (req, res, next) => {
         });
 });
 
+//POST https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients
 router.post('/', (req, res, next) => {
     //creating a mongoose model
     const ingredient = new Ingredient({
@@ -65,6 +67,7 @@ router.post('/', (req, res, next) => {
         });    
 });
 
+//PATCH https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients/{ingredientId}
 router.patch('/:ingredientId', (req, res, next) => {
     const id = req.params.ingredientId;
     const updateOps = {};
@@ -86,6 +89,7 @@ router.patch('/:ingredientId', (req, res, next) => {
         });
 });
 
+//DELETE https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients/{ingredientId}
 router.delete('/:ingredientId', (req, res, next) => {
     const id = req.params.ingredientId;
     Ingredient.deleteOne({_id: id})
