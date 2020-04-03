@@ -69,7 +69,7 @@ router.post('/', (req, res, next) => {
 });
 
 
-router.patch('/:shiftId', (req, res, next) => {
+router.put('/:shiftId', (req, res, next) => {
     const id = req.params.shiftId;
     const updateOps = {};
     for(const ops of req.body){

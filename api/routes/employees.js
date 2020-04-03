@@ -126,7 +126,7 @@ router.post('/', (req, res, next) => {
         });
 });
 
-router.patch('/:employeeId', (req, res, next) => {
+router.put('/:employeeId', (req, res, next) => {
     const id = req.params.employeeId;
     const updateOps = {};
     for(const ops of req.body){

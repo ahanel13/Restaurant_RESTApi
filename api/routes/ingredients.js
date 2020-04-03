@@ -68,7 +68,7 @@ router.post('/', (req, res, next) => {
 });
 
 //PATCH https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients/{ingredientId}
-router.patch('/:ingredientId', (req, res, next) => {
+router.put('/:ingredientId', (req, res, next) => {
     const id = req.params.ingredientId;
     const updateOps = {};
     for(const ops of req.body){

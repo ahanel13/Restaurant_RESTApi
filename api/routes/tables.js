@@ -66,7 +66,7 @@ router.post('/', (req, res, next) => {
         }); 
 });
 
-router.patch('/:tableId', (req, res, next) => {
+router.put('/:tableId', (req, res, next) => {
     const id = req.params.tableId;
     const updateOps = {};
     for(const ops of req.body){

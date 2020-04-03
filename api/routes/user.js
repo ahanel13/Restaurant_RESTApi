@@ -51,7 +51,7 @@ router.post('/signup', (req, res, next) => {
     
 });
 
-router.patch('/:userId', (req, res, next) => {
+router.put('/:userId', (req, res, next) => {
     const id = req.params.userId;
     const updateOps = {};
     for(const ops of req.body){

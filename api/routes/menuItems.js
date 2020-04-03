@@ -55,7 +55,7 @@ router.post('/', (req, res, next) => {
         }); 
 });
 
-router.patch('/', (req, res, next) => {
+router.put('/', (req, res, next) => {
     res.status(200).json({
         message: 'This endpoint is handling PATCH request for menuItems'
     });
