@@ -21,9 +21,9 @@ router.get('/', (req, res, next) => {
         });
 });
 
-router.get('/:tableId', (req, res, next) => {
-    const id = req.params.tableId;
-    Table.findById(id)
+router.get('/:table_number', (req, res, next) => {
+    const id = req.params.table_number;
+    Table.find({table_number: id})
         .exec()
         .then(doc => {
             if(doc){
