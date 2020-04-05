@@ -6,7 +6,7 @@ const MenuItem = require('./menuItem');
 const orderSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     menuItems:  [MenuItem.schema], 
-    send_to_kitchen: { type: Boolean, defualt: false},
+    send_to_kitchen: { type: Boolean, default: false},
     time_completed: Date
 },
     {timestamps: true}

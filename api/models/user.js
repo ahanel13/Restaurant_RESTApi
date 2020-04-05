@@ -15,7 +15,7 @@ const userSchema = mongoose.Schema({
     },
     password: { type: String, required: true },
     birthday: { type: Date, required: true },
-    points: { type: Number, defualt: 0 },
+    points: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model('User', userSchema);
