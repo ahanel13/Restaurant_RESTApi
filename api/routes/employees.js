@@ -1,39 +1,48 @@
-const express = require('express');
-const router = express.Router();
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const express = require('express');     //add express dependency
+const router = express.Router();        //creating router for endpoint creation
+const mongoose = require('mongoose');   //adding mongoose dependency
+const bcrypt = require('bcrypt');       //used for hashing passwords
 
+
+//importing Employee model/schema
 const Employee = require('../models/employee');
 
+
+//GET https://dijkstras-steakhouse-restapi.herokuapp.com/employees
 router.get('/', (req, res, next) => {
-    if(req.body.username){
+    
+    //if a usename was passed then the if statment will execute
+    if(req.body.username){    
+        //making username case insensitive
         const username = req.body.username.toLowerCase();
+
+        //looking for an employee by the passed username
         Employee.findOne({username: username})
             .exec()
             .then(employee => {
                 if(employee){
+                    //encyrpting the passed password and comparing with stored password
                     bcrypt.compare(req.body.password, employee.password, (err, result) => {
-                        if(err){ // if there was an error with hashing password
-                            console.log(err)
+                        
+                        if(err){ // if there was an error with comparing the password
                             return res.status(500).json({
                                 error: err
                             });
-                        } else {
-                            console.log(result);
+                        } else { // if no error occured with the comparison
+
+                            //if comparison found something with the password given it will return it in result
                             if(result){
                                 console.log(employee);
                                 res.status(200).json({employee});
-                            } else {
+                            } else { //if nothing was found
                                 res.status(200).json({
                                     message: "Inncorrect Password",
                                     employee: null
                                 });
                             }
-
                         }
-
                     });
-                } else {
+                } else { //if no employee was found by passed username
                     console.log(employee);
                     res.status(200).json({
                         message: "username does not exist",
@@ -41,19 +50,22 @@ router.get('/', (req, res, next) => {
                     });
                 }
             })
+            //catching any errors that might have occured from above operation
             .catch(err => {
                 console.log(err);
                 res.status(500).json({
                     error: err
                 });
             });
-    } else {
+    } else { //if the no username was passed        
+        //finding all employees because no argument was given
         Employee.find()
             .exec()
             .then(employees => {
                 console.log(employees);
                 res.status(200).json({employees});
             })
+            //catching any errors that might have occured from above operation
             .catch(err => {
                 console.log(err);
                 res.status(500).json({
@@ -63,19 +75,28 @@ router.get('/', (req, res, next) => {
     }
 });
 
+//GET https://dijkstras-steakhouse-restapi.herokuapp.com/employees/{employeeId}
 router.get('/:employeeId', (req, res, next) => {
+    //extracting _id from the URL endpoint
     const id = req.params.employeeId;
+
+    //searching for an employee by given ID
     Employee.findById(id)
         .exec()
         .then(employee => {
+
+            //returns an employee if found
             if(employee){
                 res.status(200).json(employee);
-            } else {
+            } 
+            //returns an error if nothing was found
+            else {
                 res.status(404).json({
                     message: 'No vaild entry found for provided id'
                 })
             }
         })
+        //catching any errors that might have occured from above operation
         .catch(err => {
             console.log(err);
             res.status(500).json({
@@ -84,6 +105,7 @@ router.get('/:employeeId', (req, res, next) => {
         });
 });
 
+//POST https://dijkstras-steakhouse-restapi.herokuapp.com/employees
 router.post('/', (req, res, next) => {
     Employee.find({ username: req.body.username.toLowerCase() }) //checking if username exists
         .exec()
@@ -114,6 +136,7 @@ router.post('/', (req, res, next) => {
                                     employee: employee
                                 });
                             })
+                            //catching any errors that might have occured from above operation
                             .catch(err => {
                                 console.log(err);
                                 res.status(500).json({
@@ -126,19 +149,25 @@ router.post('/', (req, res, next) => {
         });
 });
 
+
+//PUT https://dijkstras-steakhouse-restapi.herokuapp.com/employees/{employeeId}
 router.put('/:employeeId', (req, res, next) => {
     const id = req.params.employeeId;
     const updateOps = {};
+
+    //creating a map from the passed array
     for(const ops of req.body){
         updateOps[ops.propName] = ops.value;
     }
 
+    //updating the found employee with the passed array
     Employee.update({_id: id}, { $set: updateOps})
         .exec()
         .then(result =>{
             console.log(result);
             res.status(200).json(result);
         })
+        //catching any errors that might have occured from above operation
         .catch(err => {
             console.log(err);
             res.status(500).json({
@@ -147,7 +176,9 @@ router.put('/:employeeId', (req, res, next) => {
         });
 });
 
+//DELETE https://dijkstras-steakhouse-restapi.herokuapp.com/employees/{employeeId}
 router.delete('/:employeeId', (req, res, next) => {
+    //finds and deletes an employee based on the given array
     Employee.deleteOne({ _id: req.params.employeeId })
         .exec()
         .then(result => {
@@ -155,6 +186,7 @@ router.delete('/:employeeId', (req, res, next) => {
                 message: 'Employee deleted'
             })
         })
+        //catching any errors that might have occured from above operation
         .catch(err => {
             console.log(err);
             res.status(500).json({
