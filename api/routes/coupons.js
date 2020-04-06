@@ -69,9 +69,9 @@ router.post('/', (req, res, next) => {
         repeatable:  req.body.repeatable    
     });
 
-    console.log(Coupon); //loggin to terminal
+    console.log(coupon); //loggin to terminal
     //saving new Coupon to the database
-    Coupon.save()
+    coupon.save()
         .then(result => {
             console.log(result);
             //returning successful response
