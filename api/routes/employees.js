@@ -178,12 +178,16 @@ router.put('/:employeeId', (req, res, next) => {
 
 //DELETE https://dijkstras-steakhouse-restapi.herokuapp.com/employees/{employeeId}
 router.delete('/:employeeId', (req, res, next) => {
-    //finds and deletes an employee based on the given array
+    //finds and deletes an employee based on the given ID
     Employee.deleteOne({ _id: req.params.employeeId })
         .exec()
         .then(result => {
             res.status(200).json({
-                message: 'Employee deleted'
+                message: 'Employee deleted',
+                request: {
+                    type: 'POST', 
+                    url: 'https://dijkstras-steakhouse-restapi.herokuapp.com/employees'
+                }
             })
         })
         //catching any errors that might have occured from above operation
