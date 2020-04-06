@@ -6,7 +6,7 @@ const tableSchema = mongoose.Schema({
     user_ids: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
     ],
-    table_number: {type: String, required: true},
+    table_number: {type: String, required: true, unique: true},
     employee_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee', required: true}, 
     order_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Order'}
 });

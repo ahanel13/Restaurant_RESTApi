@@ -23,7 +23,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:table_number', (req, res, next) => {
     const id = req.params.table_number;
-    Table.find({table_number: id})
+    Table.findOne({table_number: id})
         .populate('order_id')
         .exec()
         .then(doc => {
