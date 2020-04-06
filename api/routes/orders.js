@@ -21,6 +21,36 @@ router.get('/', (req, res, next) => {
     });
 });
 
+//GET https://dijkstras-steakhouse-restapi.herokuapp.com/orders/{orderId}
+router.get('/:orderId', (req, res, next) => {
+    //extracting _id from the URL endpoint
+    const id = req.params.orderId;
+
+    //searching for an order by given ID
+    Order.findById(id)
+        .exec()
+        .then(order => {
+
+            //returns an order if found
+            if(order){
+                res.status(200).json(order);
+            } 
+            //returns an error if nothing was found
+            else {
+                res.status(404).json({
+                    message: 'No vaild entry found for provided id'
+                })
+            }
+        })
+        //catching any errors that might have occured from above operation
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
 router.post('/', (req, res, next) => {
     console.log(req.body.menuItems);
     const order = new Order({
