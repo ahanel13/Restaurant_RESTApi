@@ -592,7 +592,7 @@ Reponse body:
         "order_id": null
     }
 
-If you want to view a table and have an order connected to the table instead of null this endpoint will create and link a new, empty order to the table if an order does not already exist.
+If you want to view a table and have an order connected to the table instead of null this endpoint will create and link a new, empty order to the table if an order does not already exist. Send GET request to /tables/{table_number} where {table_number} is relaced with an interger like "5"
 Reponse body: 
 
     {
