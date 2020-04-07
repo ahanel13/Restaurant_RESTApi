@@ -13,7 +13,7 @@ router.post('/signup', (req, res, next) => {
             if(user.length >= 1){
                 return res.status(409).json({message: 'Email already exisits'})
             } else { //Creating user here
-                bcrypt.hash(req.body.password.plain, 10, (err, hash) => {
+                bcrypt.hash(req.body.password, 10, (err, hash) => {
                     if(err){ // if there was an error with hashing password
                         console.log(err)
                         return res.status(500).json({
@@ -27,7 +27,7 @@ router.post('/signup', (req, res, next) => {
                             email: req.body.email.toLowerCase(),
                             password: hash,
                             birthday: req.body.birthday,
-                            points: req.body.points 
+                            points: req.body.points
                         });
                         user.save() //Storing new user in database
                             .then(result => {
@@ -51,7 +51,7 @@ router.post('/signup', (req, res, next) => {
     
 });
 
-router.patch('/:userId', (req, res, next) => {
+router.put('/:userId', (req, res, next) => {
     const id = req.params.userId;
     const updateOps = {};
     for(const ops of req.body){
@@ -143,6 +143,10 @@ router.get('/', (req, res, next) => {
                 });
             });
     }
+});
+
+router.delete('/drop-all-users', (req, res, next) => {
+   
 });
 
 //This is allowing the variable router to be used in other files?

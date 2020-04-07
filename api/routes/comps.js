@@ -83,7 +83,7 @@ router.post('/', (req, res, next) => {
         }); 
 });
 
-router.patch('/:comp_id', (req, res, next) => {
+router.put('/:comp_id', (req, res, next) => {
     const id = req.params.comp_id;
     const updateOps = {};
     for(const ops of req.body){

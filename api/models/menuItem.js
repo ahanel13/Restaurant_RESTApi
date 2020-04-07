@@ -13,8 +13,9 @@ const menuItemSchema = mongoose.Schema({
     nutrition: { type: String, required: true},
     item_type: { type: String, required: true},
     category: { type: String, required: true},
-    paid: { type: Boolean, defualt: false},    
-    special_instruct: { type:String, defualt: "No intructions provided."}
+    prepared: {type: Boolean, default: false},
+    paid: { type: Boolean, default: false},    
+    special_instruct: { type:String, default: "No intructions provided."}
 });
 
 module.exports = mongoose.model('MenuItem', menuItemSchema);

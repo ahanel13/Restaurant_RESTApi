@@ -3,14 +3,15 @@
 * [Error handling](#error-handling)
 * [Request & Response Examples](#all-endpoints-and-request/reponse-examples)
     * [Comps](#comps)
+    * [Coupons](#coupons)
     * [Employees](#employees)
     * [Ingredients](#ingredients)
     * [MenuItems](#menuItems)
     * [Notifications](#notifications)
     * [Orders](#orders)
     * [Shifts](#Shifts)
-    * [Users](#user)
     * [Tables](#tables)
+    * [Users](#user)
 
 ## HTTP Verbs
 
@@ -85,6 +86,121 @@ Request body:
 Request body:
 
 
+### /coupons
+
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/coupons
+
+#### GET Request
+Response body:
+    
+   {
+        "coupons": [
+            {
+                "requiredItems": [
+                    "5e865ed02eccf8000445d5f2",
+                    "5e8660d161b17c0004e46c8a"
+                ],
+                "appliedItems": [
+                    "5e865ed02eccf8000445d5f2",
+                    "5e8660d161b17c0004e46c8a"
+                ],
+                "active": true,
+                "_id": "5e8aac098365003f886a922b",
+                "couponType": "Customer",
+                "discount": 100,
+                "repeatable": false,
+                "__v": 0
+            }
+        ]
+    }
+
+For a single ingredient send request to /ingredients/{ingredient_id}    
+
+#### POST Request
+Request body:
+    
+    {
+	    "couponType": "Customer",
+	    "requiredItems": [
+	    	{"_id": "5e865ed02eccf8000445d5f2"},
+	    	{"_id": "5e8660d161b17c0004e46c8a"}
+	    	],
+	    "appliedItems": [
+	    	{"_id": "5e865ed02eccf8000445d5f2"},
+	    	{"_id": "5e8660d161b17c0004e46c8a"}
+	    	],
+	    "discount": "100",
+	    "active": "true",
+	    "repeatable": "false"
+    }
+
+#### PATCH Request
+Send request to /ingredients/{ingredient_id}    
+Request body:
+    
+    [
+        {"propName": "name", "value": "Some other name"},
+        {"propName": "quantity", "value": "15"},
+    ]
+
+#### DELETE Request  
+Request body:
+
+
+### /employees
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/employees
+
+#### GET Request
+Response body:
+    
+    {
+        "employees": [
+            {
+                "tables": [],
+                "_id": "5e840707764c1d4504ea1fa0",
+                "first_name": "Anthony",
+                "last_name": "Hanel",
+                "email": "testemail02@gmail.com",
+                "password": "$2b$10$eJULvWZqQRanThpC8ntuJCz7w5HOzBQuxFdaLhZ1FJhSbrG9heFC",
+                "position": 1,
+                "__v": 0
+            }
+        ]
+    }
+
+If you want to see if a single employee exists (for signing in) then send this to the same /employees endpoint. This will either return null if a employee wasn't found or the employee object that was found.
+
+    {
+	    "email": "testemail02@gmail.com",
+	    "password": "password"
+    }
+
+For a single employee send request to /employees/{employee_id} 
+
+#### POST Request
+Request body:
+    
+    {
+	    // list of table ideas in an array as well
+        "first_name": "Anthony",
+	    "last_name": "Hanel",
+	    "email": "testemail02@gmail.com",
+	    "password": "fakepassword",
+	    "position": "1"
+    }
+
+#### PATCH Request
+Send request to /employees/{employee_id}    
+Request body:
+    
+    [
+        {"propName": "name", "value": "Some other name"},
+        {"propName": "quantity", "value": "15"},
+    ]
+
+#### DELETE Request  
+Just send the delete request to /employess/{employeeId} where {employeeId} is replaced with an ID
+
 ### /ingredients
 
 Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/ingredients
@@ -131,6 +247,7 @@ Request body:
 #### DELETE Request  
 Request body:
     
+
 
 ### /menuItems
 Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/menuItems
@@ -223,103 +340,81 @@ Request body:
 
 
 
-### /user
-Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/user
+### /notifications
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/notifications
 
 #### GET Request
+Getting every notification in the database
 Response body:
-    
+
     {
-        "users": [
+        "notifications": [
             {
-                "_id": "5e7fb9268cdb75342c869e87",
-                "first_name": "John",
-                "last_name": "Smith",
-                "email": "JohnSmith01@gmail.com",
-                "password": "$2b$10$tuENl1R6wJbPvYUsat5.6ulKNBk7NHbXnBx93OlypmjF49fKASMBa",
-                "birthday": "1971-09-22T00:00:00.000Z",
+                "_id": "5e8665dec524770de4b3fa5f",
+                "employee_id": "5e85f4c18017ef0004ea6f3b",
+                "sender": "Table 5",
+                "notificationType": "Refill",
+                "__v": 0
+            },
+            {
+                "_id": "5e86695aca77c23f90105f62",
+                "employee_id": "5e85f4c18017ef0004ea6f3b",
+                "sender": "Kitchen",
+                "notificationType": "Question",
+                "__v": 0
+            },
+            {
+                "_id": "5e866a6bca77c23f90105f63",
+                "employee_id": "5e8633fa467af70368376280",
+                "sender": "Table2",
+                "notificationType": "Help",
                 "__v": 0
             }
         ]
     }
 
-If you want to see if a single user exists (for signing in) then send this to the same /user endpoint. This will either return null if a user wasn't found or the user that was found.
-    
-    {
-        "email": "JohnSmith03@gmail.com",
-        "password": "johnysmithy"
-    }
-
-
-#### POST Request
-https://dijkstras-steakhouse-restapi.herokuapp.com/user/signup
-
-Request body:
-    
-    {
-	    "first_name": "John",
-        "last_name": "Smith",
-        "email": "JohnSmith01@gmail.com",
-        "password": "johnysmithy",
-        "birthday": "1971-09-22T00:00:00Z"
-    }
-
-#### PATCH Request
-Send request to /user/{user_id}     
-Request body:
-    
-    [
-        {"propName": "name", "value": "Some other name"},
-        {"propName": "quantity", "value": "15"},
-    ]
-
-#### DELETE Request  
-
-
-
-### /tables
-Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/tables
-
-#### GET Request
+Getting everynotification for a specific employee. Send get request to /notifications/{employee_id} and replace the {employee_id} with a valid ID of an employee
 Response body:
-    
+
     {
-        "tables": [
+        "notifications": [
             {
-                "user_ids": [],
-                "_id": "5e840f5706c59636ccf6b10c",
-                "table_number": "1",
-                "employee_id": "5e840707764c1d4504ea1fa0",
+                "_id": "5e8665dec524770de4b3fa5f",
+                "employee_id": "5e85f4c18017ef0004ea6f3b",
+                "sender": "Table 5",
+                "notificationType": "Refill",
+                "__v": 0
+            },
+            {
+                "_id": "5e86695aca77c23f90105f62",
+                "employee_id": "5e85f4c18017ef0004ea6f3b",
+                "sender": "Kitchen",
+                "notificationType": "Question",
                 "__v": 0
             }
         ]
     }
-
-For a single table send request to /tables/{table_id}    
-
+    
 #### POST Request
 Request body:
-    
+   
     {
-	    "employee_id": "5e840707764c1d4504ea1fa0",
-	    "table_number": "1"
-        //add some order_id
-        //add some array of user_ids
+	    "employee_id": "5e85f4c18017ef0004ea6f3b",
+	    "sender": "Kitchen",
+	    "notificationType": "Question"
     }
 
 #### PATCH Request
-Send request to /tables/{table_id}    
+Send request to /notifications/{notification_id}    
 Request body:
     
     [
-        {"propName": "name", "value": "Some other name"},
-        {"propName": "quantity", "value": "15"},
+    	{"propName":"sender", "value":"Table 5"},
+    	{"propName":"notificationType", "value":"Refill"}
     ]
 
 #### DELETE Request  
-Request body:
-
-
+Just send the delete request to /notifications/{notification_id} where {notification_id} is replaced with an ID
 
 ### /orders
 Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/orders
@@ -409,135 +504,7 @@ Request body:
 Request body
 
 
-### /employees
-Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/employees
 
-#### GET Request
-Response body:
-    
-    {
-        "employees": [
-            {
-                "tables": [],
-                "_id": "5e840707764c1d4504ea1fa0",
-                "first_name": "Anthony",
-                "last_name": "Hanel",
-                "email": "testemail02@gmail.com",
-                "password": "$2b$10$eJULvWZqQRanThpC8ntuJCz7w5HOzBQuxFdaLhZ1FJhSbrG9heFC",
-                "position": 1,
-                "__v": 0
-            }
-        ]
-    }
-
-If you want to see if a single employee exists (for signing in) then send this to the same /employees endpoint. This will either return null if a employee wasn't found or the employee object that was found.
-
-    {
-	    "email": "testemail02@gmail.com",
-	    "password": "password"
-    }
-
-For a single employee send request to /employees/{employee_id} 
-
-#### POST Request
-Request body:
-    
-    {
-	    // list of table ideas in an array as well
-        "first_name": "Anthony",
-	    "last_name": "Hanel",
-	    "email": "testemail02@gmail.com",
-	    "password": "fakepassword",
-	    "position": "1"
-    }
-
-#### PATCH Request
-Send request to /employees/{employee_id}    
-Request body:
-    
-    [
-        {"propName": "name", "value": "Some other name"},
-        {"propName": "quantity", "value": "15"},
-    ]
-
-#### DELETE Request  
-Just send the delete request to /employess/{employeeId} where {employeeId} is replaced with an ID
-
-### /notifications
-Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/notifications
-
-#### GET Request
-Getting every notification in the database
-Response body:
-
-    {
-        "notifications": [
-            {
-                "_id": "5e8665dec524770de4b3fa5f",
-                "employee_id": "5e85f4c18017ef0004ea6f3b",
-                "sender": "Table 5",
-                "notificationType": "Refill",
-                "__v": 0
-            },
-            {
-                "_id": "5e86695aca77c23f90105f62",
-                "employee_id": "5e85f4c18017ef0004ea6f3b",
-                "sender": "Kitchen",
-                "notificationType": "Question",
-                "__v": 0
-            },
-            {
-                "_id": "5e866a6bca77c23f90105f63",
-                "employee_id": "5e8633fa467af70368376280",
-                "sender": "Table2",
-                "notificationType": "Help",
-                "__v": 0
-            }
-        ]
-    }
-
-Getting everynotification for a specific employee. Send get request to /notifications/{employee_id} and replace the {employee_id} with a valid ID of an employee
-Response body:
-
-    {
-        "notifications": [
-            {
-                "_id": "5e8665dec524770de4b3fa5f",
-                "employee_id": "5e85f4c18017ef0004ea6f3b",
-                "sender": "Table 5",
-                "notificationType": "Refill",
-                "__v": 0
-            },
-            {
-                "_id": "5e86695aca77c23f90105f62",
-                "employee_id": "5e85f4c18017ef0004ea6f3b",
-                "sender": "Kitchen",
-                "notificationType": "Question",
-                "__v": 0
-            }
-        ]
-    }
-    
-#### POST Request
-Request body:
-   
-    {
-	    "employee_id": "5e85f4c18017ef0004ea6f3b",
-	    "sender": "Kitchen",
-	    "notificationType": "Question"
-    }
-
-#### PATCH Request
-Send request to /notifications/{notification_id}    
-Request body:
-    
-    [
-    	{"propName":"sender", "value":"Table 5"},
-    	{"propName":"notificationType", "value":"Refill"}
-    ]
-
-#### DELETE Request  
-Just send the delete request to /notifications/{notification_id} where {notification_id} is replaced with an ID
     
 ### /shifts
 Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/shifts
@@ -594,3 +561,103 @@ Patch request
 
 #### DELETE Request  
 Request body:
+
+### /tables
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/tables
+
+#### GET Request
+Response body:
+    
+    {
+        "tables": [
+            {
+                "user_ids": [],
+                "_id": "5e840f5706c59636ccf6b10c",
+                "table_number": "1",
+                "employee_id": "5e840707764c1d4504ea1fa0",
+                "__v": 0
+            }
+        ]
+    }
+
+For a single table send request to /tables/{table_id}    
+
+#### POST Request
+Request body:
+    
+    {
+	    "employee_id": "5e840707764c1d4504ea1fa0",
+	    "table_number": "1"
+        //add some order_id
+        //add some array of user_ids
+    }
+
+#### PATCH Request
+Send request to /tables/{table_id}    
+Request body:
+    
+    [
+        {"propName": "name", "value": "Some other name"},
+        {"propName": "quantity", "value": "15"},
+    ]
+
+#### DELETE Request  
+Request body:
+
+
+
+
+### /user
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/user
+
+#### GET Request
+Response body:
+    
+    {
+        "users": [
+            {
+                "_id": "5e7fb9268cdb75342c869e87",
+                "first_name": "John",
+                "last_name": "Smith",
+                "email": "JohnSmith01@gmail.com",
+                "password": "$2b$10$tuENl1R6wJbPvYUsat5.6ulKNBk7NHbXnBx93OlypmjF49fKASMBa",
+                "birthday": "1971-09-22T00:00:00.000Z",
+                "__v": 0
+            }
+        ]
+    }
+
+If you want to see if a single user exists (for signing in) then send this to the same /user endpoint. This will either return null if a user wasn't found or the user that was found.
+    
+    {
+        "email": "JohnSmith03@gmail.com",
+        "password": "johnysmithy"
+    }
+
+
+#### POST Request
+https://dijkstras-steakhouse-restapi.herokuapp.com/user/signup
+
+Request body:
+    
+    {
+	    "first_name": "John",
+        "last_name": "Smith",
+        "email": "JohnSmith01@gmail.com",
+        "password": "johnysmithy",
+        "birthday": "1971-09-22T00:00:00Z"
+    }
+
+#### PATCH Request
+Send request to /user/{user_id}     
+Request body:
+    
+    [
+        {"propName": "name", "value": "Some other name"},
+        {"propName": "quantity", "value": "15"},
+    ]
+
+#### DELETE Request  
+
+
+

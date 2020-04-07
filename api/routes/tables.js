@@ -7,7 +7,7 @@ const Employee = require('../models/employee');
 
 router.get('/', (req, res, next) => {
     Table.find()
-        .populate('employee', 'name position')
+        .populate('order_id')
         .exec()
         .then(tables => {
             console.log(tables);
@@ -21,9 +21,10 @@ router.get('/', (req, res, next) => {
         });
 });
 
-router.get('/:tableId', (req, res, next) => {
-    const id = req.params.tableId;
-    Table.findById(id)
+router.get('/:table_number', (req, res, next) => {
+    const id = req.params.table_number;
+    Table.findOne({table_number: id})
+        .populate('order_id')
         .exec()
         .then(doc => {
             if(doc){
@@ -66,7 +67,7 @@ router.post('/', (req, res, next) => {
         }); 
 });
 
-router.patch('/:tableId', (req, res, next) => {
+router.put('/:tableId', (req, res, next) => {
     const id = req.params.tableId;
     const updateOps = {};
     for(const ops of req.body){

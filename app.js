@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 
 //importing the routes
 const compsRoutes = require('./api/routes/comps');
+const couponsRoutes = require('./api/routes/coupons');
 const employeesRoutes = require('./api/routes/employees');
 const ingredientsRoutes = require('./api/routes/ingredients');
 const menuItemsRoutes = require('./api/routes/menuItems');
@@ -51,6 +52,7 @@ app.use(bodyParser.json());
 Requests sent to these urls will be sent to the routes provided that
 were imported at the beginning. Middleware */
 app.use('/comps', compsRoutes);
+app.use('/coupons', couponsRoutes);
 app.use('/employees', employeesRoutes);
 app.use('/ingredients', ingredientsRoutes);
 app.use('/menuItems', menuItemsRoutes);

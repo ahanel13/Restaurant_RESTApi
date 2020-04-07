@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const ingredientSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: { type:String, required: true }, 
-    quantity: { type: Number, defualt: 0}
+    quantity: { type: Number, default: 0}
 });
 
 module.exports = mongoose.model('Ingredient', ingredientSchema);

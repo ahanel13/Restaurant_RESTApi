@@ -69,7 +69,7 @@ router.post('/', (req, res, next) => {
         });   
 });
 
-router.patch('/:notificationId', (req, res, next) => {
+router.put('/:notificationId', (req, res, next) => {
     const id = req.params.notificationId;
     const updateOps = {};
     for(const ops of req.body){
