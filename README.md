@@ -580,7 +580,30 @@ Response body:
         ]
     }
 
-For a single table send request to /tables/{table_id}    
+To view a single table then send request to /tables/employeeview/{table_id}. This will return a table without changing any data. 
+Reponse body:
+
+    {
+        "user_ids": [],
+        "_id": "5e85165d9fbc2b0004b279fc",
+        "table_number": "8",
+        "employee_id": "5e840707764c1d4504ea1fa0",
+        "__v": 0,
+        "order_id": null
+    }
+
+If you want to view a table and have an order connected to the table instead of null this endpoint will create and link a new, empty order to the table if an order does not already exist.
+Reponse body: 
+
+    {
+        "user_ids": [],
+        "_id": "5e8515d69fbc2b0004b279f9",
+        "table_number": "5",
+        "employee_id": "5e840707764c1d4504ea1fa0",
+        "__v": 0,
+        "order_id": "5e8cda76ee007044c0c3b091"
+    }
+
 
 #### POST Request
 Request body:
@@ -601,7 +624,7 @@ Request body:
         {"propName": "quantity", "value": "15"},
     ]
 
-#### DELETE Request  
+#### DELETE Request
 Request body:
 
 
