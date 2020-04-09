@@ -168,12 +168,6 @@ Response body:
         ]
     }
 
-If you want to see if a single employee exists (for signing in) then send this to the same /employees endpoint. This will either return null if a employee wasn't found or the employee object that was found.
-
-    {
-	    "email": "testemail02@gmail.com",
-	    "password": "password"
-    }
 
 For a single employee send request to /employees/{employee_id} 
 
@@ -187,6 +181,15 @@ Request body:
 	    "email": "testemail02@gmail.com",
 	    "password": "fakepassword",
 	    "position": "1"
+    }
+
+https://dijkstras-steakhouse-restapi.herokuapp.com/employees/authentication
+If you want to see if a single employee exists (for signing in) then send this to the same /employees endpoint. This will either return null if a employee wasn't found or the employee object that was found.
+Request body:
+
+    {
+	    "username": "testemail02@gmail.com",
+	    "password": "password"
     }
 
 #### PATCH Request
@@ -592,7 +595,7 @@ Reponse body:
         "order_id": null
     }
 
-If you want to view a table and have an order connected to the table instead of null this endpoint will create and link a new, empty order to the table if an order does not already exist.
+If you want to view a table and have an order connected to the table instead of null this endpoint will create and link a new, empty order to the table if an order does not already exist. Send GET request to /tables/{table_number} where {table_number} is relaced with an interger like "5"
 Reponse body: 
 
     {
@@ -650,17 +653,11 @@ Response body:
         ]
     }
 
-If you want to see if a single user exists (for signing in) then send this to the same /user endpoint. This will either return null if a user wasn't found or the user that was found.
-    
-    {
-        "email": "JohnSmith03@gmail.com",
-        "password": "johnysmithy"
-    }
 
-
-#### POST Request
+#### POST Requests
 https://dijkstras-steakhouse-restapi.herokuapp.com/user/signup
 
+If you want to create a user then side post request to above URL
 Request body:
     
     {
@@ -669,6 +666,14 @@ Request body:
         "email": "JohnSmith01@gmail.com",
         "password": "johnysmithy",
         "birthday": "1971-09-22T00:00:00Z"
+    }
+
+https://dijkstras-steakhouse-restapi.herokuapp.com/user/authentication
+If you want to see if a single user exists (for signing in) then send this to the same /user endpoint. This will either return null if a user wasn't found or the user that was found.
+    
+    {
+        "email": "JohnSmith03@gmail.com",
+        "password": "johnysmithy"
     }
 
 #### PATCH Request

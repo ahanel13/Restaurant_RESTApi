@@ -51,44 +51,7 @@ router.post('/signup', (req, res, next) => {
     
 });
 
-router.put('/:userId', (req, res, next) => {
-    const id = req.params.userId;
-    const updateOps = {};
-    for(const ops of req.body){
-        updateOps[ops.propName] = ops.value;
-    }
-
-    User.update({_id: id}, { $set: updateOps})
-        .exec()
-        .then(result =>{
-            console.log(result);
-            res.status(200).json(result);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-});
-
-router.delete('/:userId', (req, res, next) => {
-    User.deleteOne({ _id: req.params.userId })
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                message: 'User deleted'
-            })
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-});
-
-router.get('/', (req, res, next) => {
+router.post('/authentication', (req, res, next) => {
     if(req.body.email){
         const email = req.body.email.toLowerCase();
         User.findOne({email: email})
@@ -130,19 +93,62 @@ router.get('/', (req, res, next) => {
                 });
             });
     } else {
-        User.find()
-            .exec()
-            .then(users => {
-                console.log(users);
-                res.status(200).json({users});
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json({
-                    error: err
-                });
-            });
+        res.status(200).json({
+            message: "Email was not provided"
+        });
     }
+});
+
+router.put('/:userId', (req, res, next) => {
+    const id = req.params.userId;
+    const updateOps = {};
+    for(const ops of req.body){
+        updateOps[ops.propName] = ops.value;
+    }
+
+    User.update({_id: id}, { $set: updateOps})
+        .exec()
+        .then(result =>{
+            console.log(result);
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+router.delete('/:userId', (req, res, next) => {
+    User.deleteOne({ _id: req.params.userId })
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                message: 'User deleted'
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+router.get('/', (req, res, next) => {
+    User.find()
+        .exec()
+        .then(users => {
+            console.log(users);
+            res.status(200).json({users});
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
 });
 
 router.delete('/drop-all-users', (req, res, next) => {
