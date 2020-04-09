@@ -150,16 +150,6 @@ Request body:
 ### /employees
 Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/employees
 
-    Table employees {
-      employee_id int [pk, increment]
-      tables int [ref: < tables.tables_num]
-      first_name varchar [not null]
-      last_name varchar [not null]
-      username varchar [not null]
-      password varchar [not null]
-      position int [not null]
-    }
-
 #### GET Request
 Response body:
     
