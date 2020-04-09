@@ -650,17 +650,11 @@ Response body:
         ]
     }
 
-If you want to see if a single user exists (for signing in) then send this to the same /user endpoint. This will either return null if a user wasn't found or the user that was found.
-    
-    {
-        "email": "JohnSmith03@gmail.com",
-        "password": "johnysmithy"
-    }
-
 
 #### POST Request
 https://dijkstras-steakhouse-restapi.herokuapp.com/user/signup
 
+If you want to create a user then side post request to above URL
 Request body:
     
     {
@@ -669,6 +663,13 @@ Request body:
         "email": "JohnSmith01@gmail.com",
         "password": "johnysmithy",
         "birthday": "1971-09-22T00:00:00Z"
+    }
+
+If you want to see if a single user exists (for signing in) then send this to the same /user endpoint. This will either return null if a user wasn't found or the user that was found.
+    
+    {
+        "email": "JohnSmith03@gmail.com",
+        "password": "johnysmithy"
     }
 
 #### PATCH Request
