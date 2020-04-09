@@ -168,12 +168,6 @@ Response body:
         ]
     }
 
-If you want to see if a single employee exists (for signing in) then send this to the same /employees endpoint. This will either return null if a employee wasn't found or the employee object that was found.
-
-    {
-	    "username": "testemail02@gmail.com",
-	    "password": "password"
-    }
 
 For a single employee send request to /employees/{employee_id} 
 
@@ -187,6 +181,15 @@ Request body:
 	    "email": "testemail02@gmail.com",
 	    "password": "fakepassword",
 	    "position": "1"
+    }
+
+https://dijkstras-steakhouse-restapi.herokuapp.com/employees/authentication
+If you want to see if a single employee exists (for signing in) then send this to the same /employees endpoint. This will either return null if a employee wasn't found or the employee object that was found.
+Request body:
+
+    {
+	    "username": "testemail02@gmail.com",
+	    "password": "password"
     }
 
 #### PATCH Request

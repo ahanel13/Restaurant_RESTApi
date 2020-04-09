@@ -10,7 +10,54 @@ const Employee = require('../models/employee');
 
 //GET https://dijkstras-steakhouse-restapi.herokuapp.com/employees
 router.get('/', (req, res, next) => {
-    
+    //finding all employees because no argument was given
+    Employee.find()
+        .exec()
+        .then(employees => {
+            console.log(employees);
+            res.status(200).json({employees});
+        })
+        //catching any errors that might have occured from above operation
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+//GET https://dijkstras-steakhouse-restapi.herokuapp.com/employees/{employeeId}
+router.get('/:employeeId', (req, res, next) => {
+    //extracting _id from the URL endpoint
+    const id = req.params.employeeId;
+
+    //searching for an employee by given ID
+    Employee.findById(id)
+        .exec()
+        .then(employee => {
+
+            //returns an employee if found
+            if(employee){
+                res.status(200).json(employee);
+            } 
+            //returns an error if nothing was found
+            else {
+                res.status(404).json({
+                    message: 'No vaild entry found for provided id'
+                })
+            }
+        })
+        //catching any errors that might have occured from above operation
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+//POST https://dijkstras-steakhouse-restapi.herokuapp.com/employees/authentication
+router.post('/authentication', (req, res, next) => {
     //if a usename was passed then the if statment will execute
     if(req.body.username){    
         //making username case insensitive
@@ -57,52 +104,11 @@ router.get('/', (req, res, next) => {
                     error: err
                 });
             });
-    } else { //if the no username was passed        
-        //finding all employees because no argument was given
-        Employee.find()
-            .exec()
-            .then(employees => {
-                console.log(employees);
-                res.status(200).json({employees});
-            })
-            //catching any errors that might have occured from above operation
-            .catch(err => {
-                console.log(err);
-                res.status(500).json({
-                    error: err
-                });
-            });
-    }
-});
-
-//GET https://dijkstras-steakhouse-restapi.herokuapp.com/employees/{employeeId}
-router.get('/:employeeId', (req, res, next) => {
-    //extracting _id from the URL endpoint
-    const id = req.params.employeeId;
-
-    //searching for an employee by given ID
-    Employee.findById(id)
-        .exec()
-        .then(employee => {
-
-            //returns an employee if found
-            if(employee){
-                res.status(200).json(employee);
-            } 
-            //returns an error if nothing was found
-            else {
-                res.status(404).json({
-                    message: 'No vaild entry found for provided id'
-                })
-            }
-        })
-        //catching any errors that might have occured from above operation
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
+    } else {
+        res.status(200).json({
+            message: "Username was not provided"
         });
+    }
 });
 
 //POST https://dijkstras-steakhouse-restapi.herokuapp.com/employees
