@@ -150,6 +150,16 @@ Request body:
 ### /employees
 Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/employees
 
+    Table employees {
+      employee_id int [pk, increment]
+      tables int [ref: < tables.tables_num]
+      first_name varchar [not null]
+      last_name varchar [not null]
+      username varchar [not null]
+      password varchar [not null]
+      position int [not null]
+    }
+
 #### GET Request
 Response body:
     
@@ -171,7 +181,7 @@ Response body:
 If you want to see if a single employee exists (for signing in) then send this to the same /employees endpoint. This will either return null if a employee wasn't found or the employee object that was found.
 
     {
-	    "email": "testemail02@gmail.com",
+	    "username": "testemail02@gmail.com",
 	    "password": "password"
     }
 
