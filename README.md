@@ -168,7 +168,6 @@ Response body:
         ]
     }
 
-
 For a single employee send request to /employees/{employee_id} 
 
 #### POST Request
@@ -569,19 +568,123 @@ Request body:
 Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/tables
 
 #### GET Request
+Returns all tables with their object populated
 Response body:
     
-    {
-        "tables": [
+    "tables": [
+        {
+            "user_ids": [],
+            "_id": "5e840f5706c59636ccf6b10c",
+            "table_number": "1",
+            "employee_id": "5e8651fc2d493750d0bc14d7",
+            "__v": 0,
+            "order_id": {
+                "send_to_kitchen": true,
+                "_id": "5e852a47908ad93e74b040d3",
+                "menuItems": [
+                    {
+                        "ingredients": [],
+                        "prepared": false,
+                        "paid": true,
+                        "special_instruct": "add more steak",
+                        "name": "Steak and eggs ",
+                        "price": 29.99,
+                        "_id": "5e865ed02eccf8000445d5f2"
+                    }
+                ],
+                "createdAt": "2020-04-01T23:56:55.456Z",
+                "updatedAt": "2020-04-09T23:55:08.254Z",
+                "__v": 0
+            }
+        },
+        {
+            "user_ids": [],
+            "_id": "5e851121c849ed00047b4ed3",
+            "table_number": "2",
+            "employee_id": "5e840707764c1d4504ea1fa0",
+            "__v": 0,
+            "order_id": {
+                "send_to_kitchen": true,
+                "_id": "5e8cd7b29eaf153a20af68a3",
+                "menuItems": [
+                    {
+                        "ingredients": [],
+                        "prepared": false,
+                        "paid": true,
+                        "special_instruct": "more steak",
+                        "name": "Steak and eggs ",
+                        "price": 29.99,
+                        "_id": "5e865ed02eccf8000445d5f2"
+                    },
+                    {
+                        "ingredients": [
+                            "5e852fca070c080004bc03db"
+                        ],
+                        "prepared": false,
+                        "paid": true,
+                        "special_instruct": "sgjeng",
+                        "name": "Omelette du Waitstaff",
+                        "price": 19.99,
+                        "_id": "5e8660d161b17c0004e46c8a"
+                    }
+                ],
+                "createdAt": "2020-04-07T19:42:42.478Z",
+                "updatedAt": "2020-04-10T02:34:52.687Z",
+                "__v": 0
+            }
+        },
+        {
+            "user_ids": [],
+            "_id": "5e8515c59fbc2b0004b279f7",
+            "table_number": "3",
+            "employee_id": "5e840707764c1d4504ea1fa0",
+            "__v": 0,
+            "order_id": {
+                "send_to_kitchen": false,
+                "_id": "5e8cd80fee007044c0c3b090",
+                "menuItems": null,
+                "createdAt": "2020-04-07T19:44:15.095Z",
+                "updatedAt": "2020-04-07T19:44:15.095Z",
+                "__v": 0
+            }
+        },
+        {
+            "user_ids": [],
+            "_id": "5e8515de9fbc2b0004b279fa",
+            "table_number": "6",
+            "employee_id": "5e840707764c1d4504ea1fa0",
+            "__v": 0,
+            "order_id": null
+        }
+
+There will also be a GET for an employee to view all tables with or without an order. This GET will return a table object without the order object being populated.
+
+    "tables": [
             {
                 "user_ids": [],
                 "_id": "5e840f5706c59636ccf6b10c",
                 "table_number": "1",
+                "employee_id": "5e8651fc2d493750d0bc14d7",
+                "__v": 0,
+                "order_id": "5e852a47908ad93e74b040d3"
+            },
+            {
+                "user_ids": [],
+                "_id": "5e851121c849ed00047b4ed3",
+                "table_number": "2",
                 "employee_id": "5e840707764c1d4504ea1fa0",
-                "__v": 0
-            }
-        ]
-    }
+                "__v": 0,
+                "order_id": "5e8cd7b29eaf153a20af68a3"
+            },
+            {
+                "user_ids": [],
+                "_id": "5e8515de9fbc2b0004b279fa",
+                "table_number": "3",
+                "employee_id": "5e840707764c1d4504ea1fa0",
+                "__v": 0,
+                "order_id": null
+        }
+    ]
 
 To view a single table then send request to /tables/employeeview/{table_id}. This will return a table without changing any data. 
 Reponse body:
