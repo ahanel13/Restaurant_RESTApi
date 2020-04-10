@@ -85,6 +85,7 @@ router.get('/:table_number', (req, res, next) => {
                     doc.order_id = order._id;
 
                     Table.update({_id: doc._id}, { $set: doc})
+                    .populate('order_id')
                     .exec()
                     .then(result =>{
                         console.log(result);
