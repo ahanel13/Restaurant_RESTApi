@@ -7,8 +7,25 @@ const Employee = require('../models/employee');
 const Order = require('../models/order');
 
 router.get('/', (req, res, next) => {
+    //this will return a table with the order object fully populated
     Table.find()
         .populate('order_id')
+        .exec()
+        .then(tables => {
+            console.log(tables);
+            res.status(200).json({tables});
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+router.get('/employeeview', (req, res, next) => {
+    //this will return a table object with just the order id
+    Table.find()
         .exec()
         .then(tables => {
             console.log(tables);
