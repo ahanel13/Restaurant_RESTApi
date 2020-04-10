@@ -85,11 +85,16 @@ router.get('/:table_number', (req, res, next) => {
                     doc.order_id = order._id;
 
                     Table.update({_id: doc._id}, { $set: doc})
-                    .populate('order_id')
                     .exec()
                     .then(result =>{
                         console.log(result);
-                        res.status(200).json(doc);
+                        res.status(200).json({
+                            _id: doc._id,
+                            user_ids: doc.user_ids,
+                            table_number: doc.table_number,
+                            employee_id: doc.employee_id,
+                            order_id: order
+                        });
                     })
                     .catch(err => {
                         console.log(err);
