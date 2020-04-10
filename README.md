@@ -11,6 +11,7 @@
     * [Orders](#orders)
     * [Shifts](#Shifts)
     * [Tables](#tables)
+    * [Tips](#tips)
     * [Users](#user)
 
 ## HTTP Verbs
@@ -73,7 +74,7 @@ Request body:
     	"menuItem_id": "5e865ed02eccf8000445d5f2"
     }
 
-#### PATCH Request
+#### PUT Request
 Send request to /ingredients/{ingredient_id}    
 Request body:
     
@@ -134,7 +135,7 @@ Request body:
 	    "repeatable": "false"
     }
 
-#### PATCH Request
+#### PUT Request
 Send request to /ingredients/{ingredient_id}    
 Request body:
     
@@ -191,7 +192,7 @@ Request body:
 	    "password": "password"
     }
 
-#### PATCH Request
+#### PUT Request
 Send request to /employees/{employee_id}    
 Request body:
     
@@ -237,7 +238,7 @@ Request body:
         "quantity": "12" 
     }
 
-#### PATCH Request
+#### PUT Request
 Send request to /ingredients/{ingredient_id}    
 Request body:
     
@@ -327,7 +328,7 @@ Request body:
         "special_instruct": "I want this to be medium-well" 
     }
 
-#### PATCH Request
+#### PUT Request
 Send request to /menuItems/{menuItem_id}    
 Request body:
     
@@ -406,7 +407,7 @@ Request body:
 	    "notificationType": "Question"
     }
 
-#### PATCH Request
+#### PUT Request
 Send request to /notifications/{notification_id}    
 Request body:
     
@@ -498,7 +499,7 @@ Request body:
 	    ]
     }
 
-#### PATCH Request
+#### PUT Request
 Send request to /orders/{order_id}    
 Request body:
 
@@ -541,7 +542,7 @@ Request body:
     	"employee_id": "5e850b90c849ed00047b4ec9"
     }
 
-#### PATCH Request
+#### PUT Request
 Send request to /shifts/{shift_id}    
 Request body:
 
@@ -721,7 +722,7 @@ Request body:
         //add some array of user_ids
     }
 
-#### PATCH Request
+#### PUT Request
 Send request to /tables/{table_id}    
 Request body:
     
@@ -733,6 +734,54 @@ Request body:
 #### DELETE Request
 Request body:
 
+
+### /tips
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/tips
+
+#### GET Request
+Response body:
+
+    {
+        "tips": [
+            {
+                "_id": "5e90c9999cc2254a88c69d33",
+                "employee_id": "5e8e6d4b9696520004639e73",
+                "tip_amount": 1.99,
+                "createdAt": "2020-04-10T19:31:37.554Z",
+                "updatedAt": "2020-04-10T19:32:53.013Z",
+                "__v": 0
+            },
+            {
+                "_id": "5e90ce7a0e82082d98c6dc1d",
+                "employee_id": "5e8e6d4b9696520004639e73",
+                "tip_amount": 3.6,
+                "createdAt": "2020-04-10T19:52:26.804Z",
+                "updatedAt": "2020-04-10T19:52:26.804Z",
+                "__v": 0
+            }
+        ]
+    }
+
+To GET all tips for a specific employee request from /employees/{employee_id} where {employee_id} is replaced with a valid employee id
+
+#### POST Request
+Request body:
+    
+    {
+	    "employee_id": "5e8e6d4b9696520004639e73",
+	    "tip_amount": "2.75"
+    }
+
+#### PUT Request
+Send request to /comps/{comp_id}    
+Request body:
+    
+    [
+	    {"propName":"tip_amount", "value":"1.99"}
+    ]
+
+#### DELETE Request  
+Request body:
 
 
 
@@ -779,7 +828,7 @@ If you want to see if a single user exists (for signing in) then send this to th
         "password": "johnysmithy"
     }
 
-#### PATCH Request
+#### PUT Request
 Send request to /user/{user_id}     
 Request body:
     
