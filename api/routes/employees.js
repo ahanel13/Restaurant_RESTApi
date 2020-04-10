@@ -20,6 +20,7 @@ router.get('/', (req, res, next) => {
         //catching any errors that might have occured from above operation
         .catch(err => {
             console.log(err);
+            //returning server error
             res.status(500).json({
                 error: err
             });
@@ -50,6 +51,7 @@ router.get('/:employeeId', (req, res, next) => {
         //catching any errors that might have occured from above operation
         .catch(err => {
             console.log(err);
+            //returning server error
             res.status(500).json({
                 error: err
             });
@@ -100,6 +102,7 @@ router.post('/authentication', (req, res, next) => {
             //catching any errors that might have occured from above operation
             .catch(err => {
                 console.log(err);
+                //returning server error
                 res.status(500).json({
                     error: err
                 });
@@ -145,6 +148,7 @@ router.post('/', (req, res, next) => {
                             //catching any errors that might have occured from above operation
                             .catch(err => {
                                 console.log(err);
+                                //returning server error
                                 res.status(500).json({
                                     error: err
                                 });
@@ -176,6 +180,7 @@ router.put('/:employeeId', (req, res, next) => {
         //catching any errors that might have occured from above operation
         .catch(err => {
             console.log(err);
+            //returning server error
             res.status(500).json({
                 error: err
             });
@@ -201,6 +206,7 @@ router.delete('/:employeeId', (req, res, next) => {
         //catching any errors that might have occured from above operation
         .catch(err => {
             console.log(err);
+            //returning server error
             res.status(500).json({
                 error: err
             });
@@ -221,6 +227,7 @@ router.delete('/:employeeId', (req, res, next) => {
             //catching any errors that might have occured from above operation
             .catch(err => {
                 console.log(err);
+                //returning server error
                 res.status(500).json({
                     error: err
                 });
