@@ -1,8 +1,8 @@
-const express = require('express');     //add express dependency
+const express = require('express');     //adding express dependency
 const router = express.Router();        //creating router for endpoint creation
 const mongoose = require('mongoose');   //adding mongoose dependency
 
-//importing Coupon and MenuItem model/schema
+//importing Coupon and MenuItem models/schemas
 const Coupon = require('../models/coupon');
 const MenuItem = require('../models/menuItem');
 
@@ -13,12 +13,13 @@ router.get('/', (req, res, next) => {
     .exec()
     .then(coupons => {
         console.log(coupons);
-        //returns array of coupons
+        //returns array of coupon objects
         res.status(200).json({coupons});
     })
     //catching any errors that might have occured from above operation
     .catch(err => {
         console.log(err);
+        //returning server error
         res.status(500).json({
             error: err
         });
@@ -50,6 +51,7 @@ router.get('/:couponId', (req, res, next) => {
         //catching any errors that might have occured from above operation
         .catch(err => {
             console.log(err);
+            //returning server error
             res.status(500).json({
                 error: err
             });
@@ -60,7 +62,7 @@ router.get('/:couponId', (req, res, next) => {
 router.post('/', (req, res, next) => {
     //creating temporary coupon with information passed in json
     const coupon = new Coupon({
-        _id: new mongoose.Types.ObjectId(),
+        _id: new mongoose.Types.ObjectId(), //generating new mongoose/mongodb object id
         couponType: req.body.couponType, 
         requiredItems: req.body.requiredItems,
         appliedItems: req.body.appliedItems,
@@ -69,8 +71,8 @@ router.post('/', (req, res, next) => {
         repeatable:  req.body.repeatable,
         description: req.body.description    
     });
-
-    console.log(coupon); //loggin to terminal
+    //logging new doc in terminal
+    console.log(coupon);
     //saving new Coupon to the database
     coupon.save()
         .then(result => {
@@ -83,6 +85,7 @@ router.post('/', (req, res, next) => {
         //catching any errors that might have occured from above operation
         .catch(err => {
             console.log(err);
+            //returning server error
             res.status(500).json({
                 error: err
             });
@@ -110,6 +113,7 @@ router.put('/:couponId', (req, res, next) => {
         //catching any errors that might have occured from above operation
         .catch(err => {
             console.log(err);
+            //returning server error
             res.status(500).json({
                 error: err
             });
@@ -133,6 +137,8 @@ router.delete('/:couponId', (req, res, next) => {
         })
         //catching any errors that might have occured from above operation
         .catch(err => {
+            console.log(err);
+            //returning server error
             res.status(500).json({
                 error: err
             });

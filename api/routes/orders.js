@@ -1,4 +1,4 @@
-const express = require('express');     //add express dependency
+const express = require('express');     //adding express dependency
 const router = express.Router();        //creating router for endpoint creation
 const mongoose = require('mongoose');   //adding mongoose dependency
 
