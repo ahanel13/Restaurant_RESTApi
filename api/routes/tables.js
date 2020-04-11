@@ -81,7 +81,7 @@ router.get('/employeeview/:table_id', (req, res, next) => {
 
 //GET https://dijkstras-steakhouse-restapi.herokuapp.com/tables/{table_number}
 router.get('/:table_number', (req, res, next) => {
-    //extraing table_number from url parameter
+    //extracting table_number from url parameter
     const id = req.params.table_number;
     Table.findOne({table_number: id})
         //populating order_id with an order object for returning
@@ -153,7 +153,7 @@ router.get('/:table_number', (req, res, next) => {
 router.post('/', (req, res, next) => {
     //creating a mongoose model
     const table = new Table({
-        _id: new mongoose.Types.ObjectId(),
+        _id: new mongoose.Types.ObjectId(), //generating new mongoose/mongodb object id
         user_ids: req.body.user_ids,
         table_number: req.body.table_number,
         employee_id: req.body.employee_id,
@@ -203,7 +203,7 @@ router.put('/:table_id', (req, res, next) => {
                 });
             });
 
-        //creating an array 
+        //creating an array for $set for updating
         const updateOps = {};
         for(const ops of req.body){
             updateOps[ops.propName] = ops.value;
@@ -230,7 +230,7 @@ router.put('/:table_id', (req, res, next) => {
 
 //DELETE https://dijkstras-steakhouse-restapi.herokuapp.com/tables/{table_id}
 router.delete('/:table_id', (req, res, next) => {
-    //extraing table_id from url parameter
+    //extracting table_id from url parameter
     const id = req.params.table_id;
     Table.deleteOne({_id: id})
         .exec()
