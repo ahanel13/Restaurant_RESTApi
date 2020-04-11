@@ -96,24 +96,48 @@ router.put('/:orderId', (req, res, next) => {
         });
 });
 
+//DELETE https://dijkstras-steakhouse-restapi.herokuapp.com/orders/{orderId}
 router.delete('/:order_id', (req, res, next) => {
-    console.log(req.params.order_id);
-    Order.deleteOne({_id: req.params.order_id})
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                message: 'Order deleted',
-                request: {
-                    type: 'POST', 
-                    url: 'https://dijkstras-steakhouse-restapi.herokuapp.com/orders'
-                }
+    id = req.params.order_id;
+    
+    if(id == "destroyorders"){
+        Order.deleteMany()
+            .exec()
+            .then(result => {
+                res.status(200).json({
+                    message: 'All orders have been deleted',
+                    request: {
+                        type: 'POST', 
+                        url: 'https://dijkstras-steakhouse-restapi.herokuapp.com/orders'
+                    }
+                })
+            })
+            //catching any errors that might have occured from above operation
+            .catch(err => {
+                console.log(err);
+                //returning server error
+                res.status(500).json({
+                    error: err
+                });
             });
-        })
-        .catch(err => {
-            res.status(500).json({
-                error: err
+    } else {
+        Order.deleteOne({_id: req.params.order_id})
+            .exec()
+            .then(result => {
+                res.status(200).json({
+                    message: 'Order deleted',
+                    request: {
+                        type: 'POST', 
+                        url: 'https://dijkstras-steakhouse-restapi.herokuapp.com/orders'
+                    }
+                });
+            })
+            .catch(err => {
+                res.status(500).json({
+                    error: err
+                });
             });
-        });
+    }
 });
 
 //This is allowing the variable router to be used in other files?
