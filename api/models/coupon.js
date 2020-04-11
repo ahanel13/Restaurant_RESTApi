@@ -8,7 +8,8 @@ const couponSchema = mongoose.Schema({
     appliedItems: [{type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', required: true }],
     discount: { type:Number, required: true },
     active: { type: Boolean, default: false },
-    repeatable: { type: Boolean, required: true }
+    repeatable: { type: Boolean, required: true },
+    description: {type: String, required: true}
 });
 
 module.exports = mongoose.model('Coupon', couponSchema);

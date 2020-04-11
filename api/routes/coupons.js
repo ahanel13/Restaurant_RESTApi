@@ -66,7 +66,8 @@ router.post('/', (req, res, next) => {
         appliedItems: req.body.appliedItems,
         discount: req.body.discount,
         active: req.body.active,
-        repeatable:  req.body.repeatable    
+        repeatable:  req.body.repeatable,
+        description: req.body.description    
     });
 
     console.log(coupon); //loggin to terminal
