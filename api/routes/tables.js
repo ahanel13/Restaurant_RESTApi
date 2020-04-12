@@ -202,7 +202,7 @@ router.put('/:table_id', (req, res, next) => {
                     error: err
                 });
             });
-
+    } else {
         //creating an array for $set for updating
         const updateOps = {};
         for(const ops of req.body){
