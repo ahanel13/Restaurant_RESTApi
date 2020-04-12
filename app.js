@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-if(NODE_ENV != "production"){
+if(process.env.NODE_ENV != "production"){
     const morgan = require('morgan');
     //logs requests in terminal only in development
     app.use(morgan('dev'));
