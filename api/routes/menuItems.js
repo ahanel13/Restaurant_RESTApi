@@ -29,6 +29,28 @@ router.get('/', (req, res, next) => {
         });
 });
 
+//GET https://dijkstras-steakhouse-restapi.herokuapp.com/menuitems/{menuitem_id}
+router.get('/:employee_id', (req, res, next) => {
+    //finding all menuItems because no argument was given to find()
+    MenuItem.find({_id: req.params.employee_id})
+        //replacing ingredient_id with ingredient object with only a _id and name
+        .populate('ingredients', 'name')
+        .exec()
+        .then(menuItems => {
+            console.log(menuItems);
+            //returns an array of menuItem objects each having an array of ingredient objects
+            res.status(200).json({menuItems});
+        })
+        //catching any errors that might have occured from above operation
+        .catch(err => {
+            console.log(err);
+            //returning server error
+            res.status(500).json({
+                error: err
+            });gi 
+        });
+});
+
 //POST https://dijkstras-steakhouse-restapi.herokuapp.com/menuitems
 router.post('/', (req, res, next) => {
     //creating new mongoose/mongodb document
