@@ -7,7 +7,7 @@ const menuItemSchema = mongoose.Schema({
         {type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient', required: true }
     ],
     name: { type: String, required: true},
-    picture: String,
+    picture: Buffer,
     description: { type: String, required: true},
     price: { type: Number, required: true},
     nutrition: { type: String, required: true},
