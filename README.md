@@ -280,7 +280,7 @@ Response body:
             ],
             "_id": "5e80333bc4d4630d9c47c799",
             "name": "Serlion and ",
-            "picture": "This will be a picture",
+            "picture":string encoded in base64,
             "description": "This is a steak and some potatoes",
             "price": 29.99,
             "nutrition": "Meat, caloires",
@@ -302,7 +302,7 @@ Response body:
             ],
             "_id": "5e803477bef467215ca98b9d",
             "name": "Steak and eggs ",
-            "picture": "This will be a picture",
+            "picture": string encoded in base64,
             "description": "This is a steak and some potatoes",
             "price": 29.99,
             "nutrition": "Meat, caloires",
@@ -330,9 +330,7 @@ Request body:
         "price": "29.99",
         "nutrition": "Meat, caloires" ,
         "item_type": "Steak" ,
-        "category": "Entree",
-        "paid": "0",
-        "special_instruct": "I want this to be medium-well" 
+        "category": "Entree" 
     }
 
 #### PUT Request

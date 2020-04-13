@@ -21,7 +21,6 @@ router.get('/', (req, res, next) => {
                     return {
                         _id: menuItem._id,
                         name: menuItem.name,
-                        picture: menuItem.picture.toString('ascii'),
                         description : menuItem.description, 
                         price: menuItem.price,
                         nutrition: menuItem.nutrition,
@@ -29,7 +28,9 @@ router.get('/', (req, res, next) => {
                         category: menuItem.category,
                         prepared: menuItem.prepared,
                         paid: menuItem.paid,
-                        special_instruct: menuItem.instruct
+                        special_instruct: menuItem.instruct,
+                        ingredients: menuItem.ingredients,
+                        picture: menuItem.picture.toString('ascii')
                     }
                 })
             }
@@ -47,9 +48,9 @@ router.get('/', (req, res, next) => {
 });
 
 //GET https://dijkstras-steakhouse-restapi.herokuapp.com/menuitems/{menuitem_id}
-router.get('/:employee_id', (req, res, next) => {
+router.get('/:menuitem_id', (req, res, next) => {
     //finding all menuItems because no argument was given to find()
-    MenuItem.find({_id: req.params.employee_id})
+    MenuItem.find({_id: req.params.menuitem_id})
         //replacing ingredient_id with ingredient object with only a _id and name
         .populate('ingredients', 'name')
         .exec()
@@ -59,9 +60,7 @@ router.get('/:employee_id', (req, res, next) => {
                 menuItems: docs.map( menuItem => {
                     return {
                         _id: menuItem._id,
-                        ingredients: menuItem.ingredients,
                         name: menuItem.name,
-                        picture: menuItem.picture.toString('ascii'),
                         description : menuItem.description, 
                         price: menuItem.price,
                         nutrition: menuItem.nutrition,
@@ -69,7 +68,9 @@ router.get('/:employee_id', (req, res, next) => {
                         category: menuItem.category,
                         prepared: menuItem.prepared,
                         paid: menuItem.paid,
-                        special_instruct: menuItem.instruct
+                        special_instruct: menuItem.instruct,
+                        ingredients: menuItems.ingredients,
+                        picture: menuItem.picture.toString('ascii')
                     }
                 })
             }
@@ -99,11 +100,7 @@ router.post('/', (req, res, next) => {
         price: req.body.price,
         nutrition: req.body.nutrition,
         item_type: req.body.item_type,
-        category: req.body.category,
-        prepared: req.body.prepared,
-        paid: req.body.paid,
-        special_instruct: req.body.instruct
-
+        category: req.body.category
     });
     //logging new doc in terminal
     console.log(menuItem);

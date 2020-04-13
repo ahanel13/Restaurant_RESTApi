@@ -15,7 +15,7 @@ const menuItemSchema = mongoose.Schema({
     category: { type: String, required: true},
     prepared: {type: Boolean, default: false},
     paid: { type: Boolean, default: false},    
-    special_instruct: { type:String, default: "No intructions provided."}
+    special_instruct: { type:String, default: "No instructions provided."}
 });
 
 module.exports = mongoose.model('MenuItem', menuItemSchema);
