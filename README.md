@@ -175,10 +175,10 @@ For a single employee send request to /employees/{employee_id}
 Request body:
     
     {
-	    // list of table ideas in an array as well
+	    //add an array of tables if you would like
         "first_name": "Anthony",
 	    "last_name": "Hanel",
-	    "email": "testemail02@gmail.com",
+	    "username": "testemail02",
 	    "password": "fakepassword",
 	    "position": "1"
     }
@@ -197,8 +197,15 @@ Send request to /employees/{employee_id}
 Request body:
     
     [
-        {"propName": "name", "value": "Some other name"},
-        {"propName": "quantity", "value": "15"},
+        {
+        "propName": "tables", 
+        "value": [
+            {"_id": "5e840f5706c59636ccf6b10c"},
+            {"_id": "5e851121c849ed00047b4ed3"},
+            {"_id": "5e840707764c1d4504ea1fa0"},
+            {"_id": "5e840707764c1d4504ea1fa0"}
+        ]
+        }
     ]
 
 #### DELETE Request  
