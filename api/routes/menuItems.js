@@ -36,10 +36,30 @@ router.get('/:employee_id', (req, res, next) => {
         //replacing ingredient_id with ingredient object with only a _id and name
         .populate('ingredients', 'name')
         .exec()
-        .then(menuItems => {
-            console.log(menuItems);
+        .then(docs => {
+            console.log(docs);
+            const response = {
+                menuItems: docs.map( menuItem => {
+                    return {
+                        _id: menuItems,
+                        ingredients: menuItem.ingredients,
+                        name: menuItem.name,
+                        picture: menuItem.picture.toString('base64'),
+                        description : menuItem.description, 
+                        price: menuItem.price,
+                        nutrition: menuItem.nutrition,
+                        item_type: menuItem.item_type,
+                        category: menuItem.category,
+                        prepared: menuItem.prepared,
+                        paid: menuItem.paid,
+                        special_instruct: menuItem.instruct
+                    }
+                })
+            }
             //returns an array of menuItem objects each having an array of ingredient objects
-            res.status(200).json({menuItems});
+            res.status(200).json({
+                
+            });
         })
         //catching any errors that might have occured from above operation
         .catch(err => {
