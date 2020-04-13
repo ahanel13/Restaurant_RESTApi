@@ -3,14 +3,15 @@ const router = express.Router();        //creating router for endpoint creation
 const mongoose = require('mongoose');   //adding mongoose dependency
 const bcrypt = require('bcrypt');       //used for hashing passwords
 
-//importing User model/schema
+//importing User and Coupon model/schema
 const User = require('../models/user');
-
+const Coupon = require('../models/coupon');
 
 //GET https://dijkstras-steakhouse-restapi.herokuapp.com/user
 router.get('/', (req, res, next) => {
     //finding all users because no argument was given
     User.find()
+        .populate("coupons")
         .exec()
         .then(users => {
             console.log(users);
@@ -90,6 +91,7 @@ router.post('/authentication', (req, res, next) => {
         const email = req.body.email.toLowerCase();
         //finds user based on the passed email
         User.findOne({email: email})
+            .populate("coupons")
             .exec()
             .then(user => {
                 if(user){

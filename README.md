@@ -798,14 +798,45 @@ Response body:
     {
         "users": [
             {
-                "_id": "5e7fb9268cdb75342c869e87",
-                "first_name": "John",
-                "last_name": "Smith",
-                "email": "JohnSmith01@gmail.com",
-                "password": "$2b$10$tuENl1R6wJbPvYUsat5.6ulKNBk7NHbXnBx93OlypmjF49fKASMBa",
-                "birthday": "1971-09-22T00:00:00.000Z",
-                "__v": 0
-            }
+            "points": 17995,
+            "coupons": [
+                {
+                    "requiredItems": [
+                        "5e865ed02eccf8000445d5f2",
+                        "5e8660d161b17c0004e46c8a"
+                    ],
+                    "appliedItems": [
+                        "5e865ed02eccf8000445d5f2",
+                        "5e8660d161b17c0004e46c8a"
+                    ],
+                    "active": true,
+                    "_id": "5e8aac098365003f886a922b",
+                    "couponType": "Customer",
+                    "discount": 100,
+                    "repeatable": false,
+                    "__v": 0,
+                    "description": "100% off on certain items"
+                }
+            ],
+            "_id": "5e8f921a6b4c52000400b043",
+            "first_name": "ben",
+            "last_name": "crammer",
+            "email": "crimmer@gmail.com",
+            "password": "$2b$10$Onk4i9c0AVrtGJL2cox3suxQ2Y.PdjMyBLWBuwyw7MWquIJDr9lYK",
+            "birthday": "2020-04-20T00:00:00.000Z",
+            "__v": 0
+        },
+        {
+            "points": 0,
+            "coupons": [],
+            "_id": "5e8f87cd6b4c52000400b040",
+            "first_name": "Barack",
+            "last_name": "Obama",
+            "email": "thanksobama2@gmail.com",
+            "password": "$2b$10$059nop6kKtV8Ws0hWbtiy.Ou.bRPenGGQmKNK3qSWhrRhTUGygpoO",
+            "birthday": "1971-09-22T00:00:00.000Z",
+            "__v": 0
+        }
         ]
     }
 
@@ -826,10 +857,43 @@ Request body:
 
 https://dijkstras-steakhouse-restapi.herokuapp.com/user/authentication
 If you want to see if a single user exists (for signing in) then send this to the same /user endpoint. This will either return null if a user wasn't found or the user that was found.
-    
+Request body:    
+
     {
         "email": "JohnSmith03@gmail.com",
         "password": "johnysmithy"
+    }
+
+Respone Body:
+
+    {
+        "points": 17995,
+        "coupons": [
+            {
+                "requiredItems": [
+                    "5e865ed02eccf8000445d5f2",
+                    "5e8660d161b17c0004e46c8a"
+                ],
+                "appliedItems": [
+                    "5e865ed02eccf8000445d5f2",
+                    "5e8660d161b17c0004e46c8a"
+                ],
+                "active": true,
+                "_id": "5e8aac098365003f886a922b",
+                "couponType": "Customer",
+                "discount": 100,
+                "repeatable": false,
+                "__v": 0,
+                "description": "100% off on certain items"
+            }
+        ],
+        "_id": "5e8f921a6b4c52000400b043",
+        "first_name": "ben",
+        "last_name": "crammer",
+        "email": "crimmer@gmail.com",
+        "password": "$2b$10$Onk4i9c0AVrtGJL2cox3suxQ2Y.PdjMyBLWBuwyw7MWquIJDr9lYK",
+        "birthday": "2020-04-20T00:00:00.000Z",
+        "__v": 0
     }
 
 #### PUT Request
