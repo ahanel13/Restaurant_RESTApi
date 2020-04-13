@@ -50,13 +50,13 @@ router.get('/employeeview', (req, res, next) => {
         });
 });
 
-//GET https://dijkstras-steakhouse-restapi.herokuapp.com/tables/employeeview/{table_id}
-router.get('/employeeview/:table_id', (req, res, next) => {
-    //extracting id from url parameters
-    const id = req.params.table_id;
+//GET https://dijkstras-steakhouse-restapi.herokuapp.com/tables/employeeview/{table_number}
+router.get('/employeeview/:table_number', (req, res, next) => {
+    //extracting the table number from url parameters
+    const num = req.params.table_number;
 
-    //atempting to find a table by the id passed
-    Table.findOne({_id: id})
+    //atempting to find a table by the number passed
+    Table.findOne({table_number: num})
         //populating order_id with an order object for returning
         .populate('order_id') 
         .exec()

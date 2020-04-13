@@ -692,7 +692,7 @@ There will also be a GET for an employee to view all tables with or without an o
         }
     ]
 
-To view a single table then send request to /tables/employeeview/{table_id}. This will return a table without changing any data. 
+To view a single table then send request to /tables/employeeview/{table_number}. This will return a table without changing any data. 
 Reponse body:
 
     {
