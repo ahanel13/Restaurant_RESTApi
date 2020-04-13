@@ -53,7 +53,8 @@ router.post('/signup', (req, res, next) => {
                             email: req.body.email.toLowerCase(),
                             password: hash,
                             birthday: req.body.birthday,
-                            points: req.body.points
+                            points: req.body.points,
+                            coupons: req.body.coupons || null
                         });
                         //Storing new user in database
                         user.save() 

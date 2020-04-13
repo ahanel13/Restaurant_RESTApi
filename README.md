@@ -724,7 +724,6 @@ Request body:
 	    "employee_id": "5e840707764c1d4504ea1fa0",
 	    "table_number": "1"
         //add some order_id
-        //add some array of user_ids
     }
 
 #### PUT Request
