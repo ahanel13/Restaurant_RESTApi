@@ -186,7 +186,7 @@ router.put('/:table_id', (req, res, next) => {
     // this will set all tables' orders to null is removed orders is passed
     if(id == "removeorders"){
         //updating every document in Table so order_id = null
-        Table.updateMany({}, {$set: {"order_id": null}}, true)
+        Table.updateMany({}, {$set: {"order_id": null}})
             .exec()
             .then(doc =>{
                 //prints out operation information
