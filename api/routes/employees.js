@@ -3,8 +3,9 @@ const router = express.Router();        //creating router for endpoint creation
 const mongoose = require('mongoose');   //adding mongoose dependency
 const bcrypt = require('bcrypt');       //used for hashing passwords
 
-//importing Employee model/schema
+//importing Employee and Table model/schema
 const Employee = require('../models/employee');
+const Table = require('../models/table');
 
 
 router.get('/', (req, res, next) => {
@@ -134,7 +135,8 @@ router.post('/', (req, res, next) => {
                             last_name: req.body.last_name,
                             username: req.body.username.toLowerCase(), //creating a case insensitive username
                             password: hash, //using the hashed password
-                            position: req.body.position
+                            position: req.body.position,
+                            tables: req.body.tables
                         });
                         employee.save() //Storing new employee in database
                             .then(result => {
@@ -170,10 +172,30 @@ router.put('/:employee_id', (req, res, next) => {
         updateOps[ops.propName] = ops.value;
     }
 
+    
+
     //updating the found employee with the new map
-    Employee.update({_id: id}, { $set: updateOps})
+    Employee.updateOne({_id: id}, { $set: updateOps})
         .exec()
         .then(result =>{
+            if(updateOps["tables"]){
+                for(let i = 0; i < updateOps["tables"].length; i++){
+                    Table.updateOne({_id: updateOps["tables"][i]}, {$set: {employee_id: id}})
+                    .exec()
+                    .then(table_result => {
+                        console.log(table_result);
+                    })
+                    //catching any errors that might have occured from above operation
+                    .catch(err => {
+                        console.log(err);
+                        //returning server error
+                        res.status(500).json({
+                            error: err
+                        });
+                    });
+                    
+                }
+            }
             console.log(result);
             //returning successful operation information
             res.status(200).json(result);
