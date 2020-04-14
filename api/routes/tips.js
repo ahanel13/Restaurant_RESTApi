@@ -1,7 +1,6 @@
-const express = require('express');     //add express dependency
+const express = require('express');     //adding express dependency
 const router = express.Router();        //creating router for endpoint creation
 const mongoose = require('mongoose');   //adding mongoose dependency
-
 
 //importing Employee and Tip model/schema
 const Tip = require('../models/tip');
@@ -15,7 +14,7 @@ router.get('/', (req, res, next) => {
         .exec()
         .then(tips => {
             console.log(tips);
-            //returning successful response
+            //returning an array of tip objects
             res.status(200).json({tips});
         })
         //catching any errors that might have occured from above operation
@@ -65,7 +64,7 @@ router.post('/', (req, res, next) => {
             }
             //creating a mongoose document
             const tip = new Tip({
-                _id: new mongoose.Types.ObjectId(),
+                _id: new mongoose.Types.ObjectId(), //generating new mongoose/mongodb object id
                 employee_id: req.body.employee_id,
                 tip_amount: req.body.tip_amount
             });

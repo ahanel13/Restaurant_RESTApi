@@ -16,6 +16,9 @@ const userSchema = mongoose.Schema({
     password: { type: String, required: true },
     birthday: { type: Date, required: true },
     points: { type: Number, default: 0 },
+    coupons: [
+        {type: mongoose.Schema.Types.ObjectId, ref: 'Coupon', default: null}
+    ]
 });
 
 module.exports = mongoose.model('User', userSchema);

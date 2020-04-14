@@ -1,14 +1,13 @@
-const express = require('express');     //add express dependency
+const express = require('express');     //adding express dependency
 const router = express.Router();        //creating router for endpoint creation
 const mongoose = require('mongoose');   //adding mongoose dependency
 const bcrypt = require('bcrypt');       //used for hashing passwords
 
-
-//importing Employee model/schema
+//importing Employee and Table model/schema
 const Employee = require('../models/employee');
+const Table = require('../models/table');
 
 
-//GET https://dijkstras-steakhouse-restapi.herokuapp.com/employees
 router.get('/', (req, res, next) => {
     //finding all employees because no argument was given
     Employee.find()
@@ -27,10 +26,10 @@ router.get('/', (req, res, next) => {
         });
 });
 
-//GET https://dijkstras-steakhouse-restapi.herokuapp.com/employees/{employeeId}
-router.get('/:employeeId', (req, res, next) => {
+//GET https://dijkstras-steakhouse-restapi.herokuapp.com/employees/{employee_id}
+router.get('/:employee_id', (req, res, next) => {
     //extracting _id from the URL endpoint
-    const id = req.params.employeeId;
+    const id = req.params.employee_id;
 
     //searching for an employee by given ID
     Employee.findById(id)
@@ -85,7 +84,7 @@ router.post('/authentication', (req, res, next) => {
                                 res.status(200).json({employee});
                             } else { //if nothing was found
                                 res.status(200).json({
-                                    message: "Inncorrect Password",
+                                    message: "Incorrect Password",
                                     employee: null
                                 });
                             }
@@ -116,6 +115,7 @@ router.post('/authentication', (req, res, next) => {
 
 //POST https://dijkstras-steakhouse-restapi.herokuapp.com/employees
 router.post('/', (req, res, next) => {
+    //checking if employee username exists
     Employee.find({ username: req.body.username.toLowerCase() }) //checking if username exists
         .exec()
         .then(employee => {
@@ -130,12 +130,13 @@ router.post('/', (req, res, next) => {
                         });
                     } else { //creating employee with hashed password
                         const employee = new Employee({
-                            _id: new mongoose.Types.ObjectId(),
+                            _id: new mongoose.Types.ObjectId(), //generating new mongoose/mongodb object id
                             first_name: req.body.first_name,
                             last_name: req.body.last_name,
-                            username: req.body.username.toLowerCase(),
-                            password: hash,
-                            position: req.body.position
+                            username: req.body.username.toLowerCase(), //creating a case insensitive username
+                            password: hash, //using the hashed password
+                            position: req.body.position,
+                            tables: req.body.tables
                         });
                         employee.save() //Storing new employee in database
                             .then(result => {
@@ -160,21 +161,43 @@ router.post('/', (req, res, next) => {
 });
 
 
-//PUT https://dijkstras-steakhouse-restapi.herokuapp.com/employees/{employeeId}
-router.put('/:employeeId', (req, res, next) => {
-    const id = req.params.employeeId;
-    const updateOps = {};
+//PUT https://dijkstras-steakhouse-restapi.herokuapp.com/employees/{employee_id}
+router.put('/:employee_id', (req, res, next) => {
+    // extracting employee id from url parameters
+    const id = req.params.employee_id;
 
     //creating a map from the passed array
+    const updateOps = {};
     for(const ops of req.body){
         updateOps[ops.propName] = ops.value;
     }
 
-    //updating the found employee with the passed array
-    Employee.update({_id: id}, { $set: updateOps})
+    
+
+    //updating the found employee with the new map
+    Employee.updateOne({_id: id}, { $set: updateOps})
         .exec()
         .then(result =>{
+            if(updateOps["tables"]){
+                for(let i = 0; i < updateOps["tables"].length; i++){
+                    Table.updateOne({_id: updateOps["tables"][i]}, {$set: {employee_id: id}})
+                    .exec()
+                    .then(table_result => {
+                        console.log(table_result);
+                    })
+                    //catching any errors that might have occured from above operation
+                    .catch(err => {
+                        console.log(err);
+                        //returning server error
+                        res.status(500).json({
+                            error: err
+                        });
+                    });
+                    
+                }
+            }
             console.log(result);
+            //returning successful operation information
             res.status(200).json(result);
         })
         //catching any errors that might have occured from above operation
@@ -187,14 +210,15 @@ router.put('/:employeeId', (req, res, next) => {
         });
 });
 
-//DELETE https://dijkstras-steakhouse-restapi.herokuapp.com/employees/{employeeId}
-router.delete('/:employeeId', (req, res, next) => {
-    const id = req.params.employeeId;
+//DELETE https://dijkstras-steakhouse-restapi.herokuapp.com/employees/{employee_id}
+router.delete('/:employee_id', (req, res, next) => {
+    const id = req.params.employee_id;
 
     if(id == "destroyemployees"){
         Employee.deleteMany()
         .exec()
         .then(result => {
+            //returning successful response
             res.status(200).json({
                 message: 'All employees have been deleted',
                 request: {
@@ -213,9 +237,10 @@ router.delete('/:employeeId', (req, res, next) => {
         });
     } else {
         //finds and deletes an employee based on the given ID
-        Employee.deleteOne({ _id: req.params.employeeId })
+        Employee.deleteOne({ _id: id })
             .exec()
             .then(result => {
+                //returning successful response
                 res.status(200).json({
                     message: 'Employee deleted',
                     request: {

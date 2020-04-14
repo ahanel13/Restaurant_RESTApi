@@ -2,7 +2,12 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-//const morgan = require('morgan');
+
+if(process.env.NODE_ENV != "production"){
+    const morgan = require('morgan');
+    //logs requests in terminal only in development
+    app.use(morgan('dev'));
+}
 
 //adding headers to avoid CORS errors
 app.use((req, res, next) => {
@@ -33,8 +38,7 @@ const tablesRoutes = require('./api/routes/tables');
 const tipsRoutes = require('./api/routes/tips');
 const userRoutes = require('./api/routes/user');
 
-//logs requests in terminal only in development
-//app.use(morgan('dev'));
+
 
 mongoose.connect('mongodb+srv://admin:adminadmin@node-rest-shop-wzkfd.mongodb.net/test?retryWrites=true&w=majority',
 { 
