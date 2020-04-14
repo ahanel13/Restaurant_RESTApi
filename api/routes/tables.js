@@ -101,7 +101,7 @@ router.get('/:table_number', (req, res, next) => {
                         menuItems: null,
                         send_to_kitchen: false,
                         employee_id: doc.employee_id,
-                        table_number: doc.table_number
+                        table_number: id
                     });
                     //saving order in database
                     order.save();
