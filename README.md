@@ -501,7 +501,8 @@ Request body:
     			"paid": "0",
     			"special_instruct": "I want this to be medium-well" 	
 	    	}
-	    ]
+	    ],
+        employee_id: "5e850b90c849ed00047b4ec9"
     }
 
 #### PUT Request
@@ -586,6 +587,7 @@ Response body:
             "__v": 0,
             "order_id": {
                 "send_to_kitchen": true,
+                'employee": "5e850b90c849ed00047b4ec9",
                 "_id": "5e852a47908ad93e74b040d3",
                 "menuItems": [
                     {
@@ -611,6 +613,7 @@ Response body:
             "__v": 0,
             "order_id": {
                 "send_to_kitchen": true,
+                'employee": "5e850b90c849ed00047b4ec9",
                 "_id": "5e8cd7b29eaf153a20af68a3",
                 "menuItems": [
                     {
@@ -646,6 +649,7 @@ Response body:
             "employee_id": "5e840707764c1d4504ea1fa0",
             "__v": 0,
             "order_id": {
+                'employee": "5e850b90c849ed00047b4ec9",
                 "send_to_kitchen": false,
                 "_id": "5e8cd80fee007044c0c3b090",
                 "menuItems": null,

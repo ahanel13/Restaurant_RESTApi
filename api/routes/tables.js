@@ -99,7 +99,8 @@ router.get('/:table_number', (req, res, next) => {
                     const order = new Order({
                         _id: new mongoose.Types.ObjectId(),
                         menuItems: null,
-                        send_to_kitchen: false
+                        send_to_kitchen: false,
+                        employee_id: doc.employee_id
                     });
                     //saving order in database
                     order.save();

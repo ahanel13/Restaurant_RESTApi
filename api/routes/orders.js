@@ -63,7 +63,8 @@ router.post('/', (req, res, next) => {
     const order = new Order({
         _id: new mongoose.Types.ObjectId(), //generating new mongoose/mongodb object id
         menuItems: req.body.menuItems,
-        send_to_kitchen: req.body.send
+        send_to_kitchen: req.body.send, 
+        employee_id: req.body.employee_id
     });
     //saving document to mongodb
     order.save()
