@@ -8,7 +8,7 @@ const orderSchema = new mongoose.Schema({
     menuItems:  [MenuItem.schema], 
     send_to_kitchen: { type: Boolean, default: false},
     employee_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee', required: true},
-    table_id: Number,
+    table_number: Number,
     time_completed: Date
 },
     {timestamps: true}
