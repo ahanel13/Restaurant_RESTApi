@@ -161,7 +161,7 @@ Response body:
                 "_id": "5e840707764c1d4504ea1fa0",
                 "first_name": "Anthony",
                 "last_name": "Hanel",
-                "email": "testemail02@gmail.com",
+                "username": "testemail02",
                 "password": "$2b$10$eJULvWZqQRanThpC8ntuJCz7w5HOzBQuxFdaLhZ1FJhSbrG9heFC",
                 "position": 1,
                 "__v": 0
