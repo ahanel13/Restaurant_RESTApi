@@ -153,6 +153,7 @@ router.get('/:table_number', (req, res, next) => {
 
 //POST https://dijkstras-steakhouse-restapi.herokuapp.com/tables
 router.post('/', (req, res, next) => {
+    console.log("help");
     //creating a mongoose model
     const table = new Table({
         _id: new mongoose.Types.ObjectId(), //generating new mongoose/mongodb object id
@@ -177,6 +178,55 @@ router.post('/', (req, res, next) => {
                 error: err
             });
         });
+});
+
+//POST https://dijkstras-steakhouse-restapi.herokuapp.com/tables
+router.post('/finishorder/:table_id', (req, res, next) => {
+    const id = req.params.table_id;
+    Table.findById(id)
+        .then(table => {
+            Order.updateOne({_id: table.order_id}, {$set: {time_completed: Date.now()}})
+                .then(result => {
+                    //saving the model to the database
+                    Table.update({_id: req.params.table_id},{$set: {order_id: null}})
+                    .then(result => {
+                        //returning success message
+                        console.log(result);
+                        res.status(201).json();
+                    
+                    })
+                    //catching any errors that might have occured from above operation
+                    .catch(err => {
+                        console.log(err);
+                        //returning server error
+                        res.status(500).json({
+                            error: err
+                        });
+                    });
+
+                })
+                //catching any errors that might have occured from above operation
+                .catch(err => {
+                    console.log(err);
+                    //returning server error
+                    res.status(500).json({
+                        error: err
+                    });
+                });
+            
+            
+
+        })
+        //catching any errors that might have occured from above operation
+        .catch(err => {
+            console.log(err);
+            //returning server error
+            res.status(500).json({
+                error: err
+            });
+        });
+    
+    
 });
 
 //PUT https://dijkstras-steakhouse-restapi.herokuapp.com/tables/{table_id}

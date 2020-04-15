@@ -733,6 +733,10 @@ Request body:
         //add some order_id
     }
 
+
+If a order is completed and paided for. Sending a post request /tables/finishorder/{table_id} where {table_id} is replaced with a table id. This will updated the order completed_time to the Date.now() and then it will remove the order from the table by making order_id = null. There is not json payload required for this POST request.
+
+
 #### PUT Request
 Send request to /tables/{table_id}    
 Request body:
