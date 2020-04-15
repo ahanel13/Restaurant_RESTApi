@@ -118,22 +118,47 @@ router.put('/:notification_id', (req, res, next) => {
 
 //DELETE https://dijkstras-steakhouse-restapi.herokuapp.com/notifications/{notification_id}
 router.delete('/:notification_id', (req, res, next) => {
-    //finds and deletes a notification based on the given ID
-    Notification.deleteOne({_id: req.params.notification_id})
-        .exec()
-        .then(result =>{
-            //returning successful operation information
-            res.status(200).json(result);
-        })
-        //catching any errors that might have occured from above operation
-        .catch(err => {
-            console.log(err);
-            //returning server error
-            res.status(500).json({
-                error: err
+    const id = req.params.notification_id;
+    
+    if(id == "destorynotifications"){
+        Notification.deleteMany()
+            .exec()
+            .then(result => {
+                //returning successful message along with a post request
+                res.status(200).json({
+                    message: 'All notifications have been deleted',
+                    request: {
+                        type: 'POST', 
+                        url: 'https://dijkstras-steakhouse-restapi.herokuapp.com/notifications'
+                    }
+                })
+            })
+            //catching any errors that might have occured from above operation
+            .catch(err => {
+                console.log(err);
+                //returning server error
+                res.status(500).json({
+                    error: err
+                });
             });
-        });
-});
+    } else {
+        //finds and deletes a notification based on the given ID
+        Notification.deleteOne({_id: req.params.notification_id})
+            .exec()
+            .then(result =>{
+                //returning successful operation information
+                res.status(200).json(result);
+            })
+            //catching any errors that might have occured from above operation
+            .catch(err => {
+                console.log(err);
+                //returning server error
+                res.status(500).json({
+                    error: err
+                });
+            });
+    }
+}); 
 
 //This is allowing the variable router to be used in other files?
 module.exports = router;
