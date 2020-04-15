@@ -14,6 +14,7 @@ const employeeSchema = mongoose.Schema({
         unique: true, 
         required: true
     },
+    pay: {type: Number, required: true},
     password: { type: String, required: true },
     position: { type: Number, required: true }
 });
