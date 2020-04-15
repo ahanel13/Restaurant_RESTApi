@@ -48,6 +48,7 @@ Response body:
                 "_id": "5e8695b0cb2a6e3de83a7321",
                 "employee_id": "5e8633fa467af70368376280",
                 "menuItem_id": "5e8660d161b17c0004e46c8a",
+                reason": "I comped this item because it was made wrong",
                 "createdAt": "2020-04-03T01:47:28.470Z",
                 "updatedAt": "2020-04-03T01:50:12.273Z",
                 "__v": 0
@@ -56,6 +57,7 @@ Response body:
                 "_id": "5e8696a130bee63bacf02722",
                 "employee_id": "5e850b90c849ed00047b4ec9",
                 "menuItem_id": "5e850b90c849ed00047b4ec9",
+                reason": "They were having a rough day",
                 "createdAt": "2020-04-03T01:51:29.344Z",
                 "updatedAt": "2020-04-03T01:51:29.344Z",
                 "__v": 0
@@ -71,7 +73,8 @@ Request body:
     
     {
     	"employee_id": "5e850b90c849ed00047b4ec9",
-    	"menuItem_id": "5e865ed02eccf8000445d5f2"
+    	"menuItem_id": "5e865ed02eccf8000445d5f2",
+        "reason": "I comped this item because it was made wrong"
     }
 
 #### PUT Request
