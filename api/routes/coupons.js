@@ -79,7 +79,8 @@ router.post('/', (req, res, next) => {
             console.log(result);
             //returning successful response
             res.status(201).json({
-                message: 'Coupon was added to the database'
+                message: 'Coupon was added to the database',
+                _id: coupon._id
             });
         })
         //catching any errors that might have occured from above operation

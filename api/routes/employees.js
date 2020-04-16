@@ -136,7 +136,8 @@ router.post('/', (req, res, next) => {
                             username: req.body.username.toLowerCase(), //creating a case insensitive username
                             password: hash, //using the hashed password
                             position: req.body.position,
-                            tables: req.body.tables
+                            tables: req.body.tables,
+                            pay: req.body.pay
                         });
                         employee.save() //Storing new employee in database
                             .then(result => {
@@ -170,9 +171,7 @@ router.put('/:employee_id', (req, res, next) => {
     const updateOps = {};
     for(const ops of req.body){
         updateOps[ops.propName] = ops.value;
-    }
-
-    
+    }  
 
     //updating the found employee with the new map
     Employee.updateOne({_id: id}, { $set: updateOps})

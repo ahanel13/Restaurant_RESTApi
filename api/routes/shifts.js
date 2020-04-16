@@ -66,14 +66,30 @@ router.post('/', (req, res, next) => {
             });
         
             //saving the document to the database and returns it for the next "then()"
-            return shift.save()
+            shift.save();
+            return shift._id;
         })
         .then(shift => {
                 console.log(shift);
-                //returning successful response
-                res.status(201).json({
-                    message: 'Shift was added to the database'
+                
+                Employee.updateOne({_id: req.body.employee_id}, {$set: {current_shift: shift}})
+                .exec()
+                .then(otherResult => {
+                    //returning successful response
+                    res.status(201).json({
+                        message: 'Shift was added to the database',
+                        shift_id: shift
+                    });
+                })
+                //catching any errors that might have occured from above operation
+                .catch(err => {
+                    console.log(err);
+                    //returning server error
+                    res.status(500).json({
+                        error: err
+                    });
                 });
+                
         })
         //catching any errors that might have occured from above operation
         .catch(err => {
@@ -115,7 +131,7 @@ router.put('/:shift_id', (req, res, next) => {
 });
 
 //DELETE https://dijkstras-steakhouse-restapi.herokuapp.com/shifts/{shift_id}
-router.patch('/:shift_id', (req, res, next) => {
+router.delete('/:shift_id', (req, res, next) => {
     //finds and deletes a shift based on the given ID
     Shift.deleteOne({_id: req.params.shift_id})
         .exec()

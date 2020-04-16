@@ -67,7 +67,8 @@ router.post('/', (req, res, next) => {
             const comp = new Comp({
                 _id: new mongoose.Types.ObjectId(),
                 employee_id: req.body.employee_id,
-                menuItem_id: req.body.employee_id
+                menuItem_id: req.body.employee_id,
+                reason: req.body.reason
             });
         
             //saving the document to the database
@@ -122,21 +123,45 @@ router.delete('/:comp_id', (req, res, next) => {
     //geting the comp id from the url
     const id = req.params.comp_id;
 
-    // deleting single comp based on a matched id
-    Comp.deleteOne({_id: id})
-        .exec()
-        .then(result =>{
-            //returning successful response
-            res.status(200).json(result);
-        })
-        //catching any errors that might have occured from above operation
-        .catch(err => {
-            console.log(err);
-            //returning server error
-            res.status(500).json({
-                error: err
+    //extra endpoint for removing all the data
+    if(id == "destroycomps"){
+        Comp.deleteMany()
+            .exec()
+            .then(result => {
+                //returning successful message along with a post request
+                res.status(200).json({
+                    message: 'All comps have been deleted',
+                    request: {
+                        type: 'POST', 
+                        url: 'https://dijkstras-steakhouse-restapi.herokuapp.com/comps'
+                    }
+                })
+            })
+            //catching any errors that might have occured from above operation
+            .catch(err => {
+                console.log(err);
+                //returning server error
+                res.status(500).json({
+                    error: err
+                });
             });
-        });
+    } else {
+        // deleting single comp based on a matched id
+        Comp.deleteOne({_id: id})
+            .exec()
+            .then(result =>{
+                //returning successful response
+                res.status(200).json(result);
+            })
+            //catching any errors that might have occured from above operation
+            .catch(err => {
+                console.log(err);
+                //returning server error
+                res.status(500).json({
+                    error: err
+                });
+            });
+    }
 });
 
 //This is allowing the variable router to be used in other files?

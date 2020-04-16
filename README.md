@@ -48,6 +48,7 @@ Response body:
                 "_id": "5e8695b0cb2a6e3de83a7321",
                 "employee_id": "5e8633fa467af70368376280",
                 "menuItem_id": "5e8660d161b17c0004e46c8a",
+                reason": "I comped this item because it was made wrong",
                 "createdAt": "2020-04-03T01:47:28.470Z",
                 "updatedAt": "2020-04-03T01:50:12.273Z",
                 "__v": 0
@@ -56,6 +57,7 @@ Response body:
                 "_id": "5e8696a130bee63bacf02722",
                 "employee_id": "5e850b90c849ed00047b4ec9",
                 "menuItem_id": "5e850b90c849ed00047b4ec9",
+                reason": "They were having a rough day",
                 "createdAt": "2020-04-03T01:51:29.344Z",
                 "updatedAt": "2020-04-03T01:51:29.344Z",
                 "__v": 0
@@ -71,7 +73,8 @@ Request body:
     
     {
     	"employee_id": "5e850b90c849ed00047b4ec9",
-    	"menuItem_id": "5e865ed02eccf8000445d5f2"
+    	"menuItem_id": "5e865ed02eccf8000445d5f2",
+        "reason": "I comped this item because it was made wrong"
     }
 
 #### PUT Request
@@ -161,7 +164,7 @@ Response body:
                 "_id": "5e840707764c1d4504ea1fa0",
                 "first_name": "Anthony",
                 "last_name": "Hanel",
-                "email": "testemail02@gmail.com",
+                "username": "testemail02",
                 "password": "$2b$10$eJULvWZqQRanThpC8ntuJCz7w5HOzBQuxFdaLhZ1FJhSbrG9heFC",
                 "position": 1,
                 "__v": 0
@@ -501,7 +504,8 @@ Request body:
     			"paid": "0",
     			"special_instruct": "I want this to be medium-well" 	
 	    	}
-	    ]
+	    ],
+        employee_id: "5e850b90c849ed00047b4ec9"
     }
 
 #### PUT Request
@@ -586,6 +590,7 @@ Response body:
             "__v": 0,
             "order_id": {
                 "send_to_kitchen": true,
+                'employee": "5e850b90c849ed00047b4ec9",
                 "_id": "5e852a47908ad93e74b040d3",
                 "menuItems": [
                     {
@@ -611,6 +616,7 @@ Response body:
             "__v": 0,
             "order_id": {
                 "send_to_kitchen": true,
+                'employee": "5e850b90c849ed00047b4ec9",
                 "_id": "5e8cd7b29eaf153a20af68a3",
                 "menuItems": [
                     {
@@ -646,6 +652,7 @@ Response body:
             "employee_id": "5e840707764c1d4504ea1fa0",
             "__v": 0,
             "order_id": {
+                'employee": "5e850b90c849ed00047b4ec9",
                 "send_to_kitchen": false,
                 "_id": "5e8cd80fee007044c0c3b090",
                 "menuItems": null,
@@ -725,6 +732,10 @@ Request body:
 	    "table_number": "1"
         //add some order_id
     }
+
+
+If a order is completed and paided for. Sending a post request /tables/finishorder/{table_id} where {table_id} is replaced with a table id. This will updated the order completed_time to the Date.now() and then it will remove the order from the table by making order_id = null. There is not json payload required for this POST request.
+
 
 #### PUT Request
 Send request to /tables/{table_id}    
