@@ -16,7 +16,8 @@ const employeeSchema = mongoose.Schema({
     },
     pay: {type: Number, required: true},
     password: { type: String, required: true },
-    position: { type: Number, required: true }
+    position: { type: Number, required: true },
+    current_shift: {type: mongoose.Schema.Types.ObjectId, ref: 'Shift', default: null}
 });
 
 module.exports = mongoose.model('Employee', employeeSchema);
