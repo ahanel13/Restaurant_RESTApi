@@ -67,7 +67,7 @@ router.post('/', (req, res, next) => {
             const comp = new Comp({
                 _id: new mongoose.Types.ObjectId(),
                 employee_id: req.body.employee_id,
-                menuItem_id: req.body.employee_id,
+                menuItem_id: req.body.menuItem_id,
                 reason: req.body.reason
             });
         
