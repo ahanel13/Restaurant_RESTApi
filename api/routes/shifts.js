@@ -62,7 +62,7 @@ router.post('/', (req, res, next) => {
             const shift = new Shift({
                 _id: new mongoose.Types.ObjectId(), //generating new mongoose/mongodb object id
                 employee_id: req.body.employee_id,
-                clock_in: req.body.clock_in
+                clock_in: req.body.clock_in || Date.now()
             });
         
             //saving the document to the database and returns it for the next "then()"
