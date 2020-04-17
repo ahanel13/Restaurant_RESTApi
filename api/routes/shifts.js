@@ -132,12 +132,20 @@ router.put('/:shift_id', (req, res, next) => {
 
 //DELETE https://dijkstras-steakhouse-restapi.herokuapp.com/shifts/{shift_id}
 router.delete('/:shift_id', (req, res, next) => {
-    //finds and deletes a shift based on the given ID
-    Shift.deleteOne({_id: req.params.shift_id})
+    const id = req.params.shift_id;
+
+    if(id == "destroyshifts"){
+        Shift.deleteMany()
         .exec()
-        .then(result =>{
-            //returning successful operation information
-            res.status(200).json(result);
+        .then(result => {
+            //returning successful response
+            res.status(200).json({
+                message: 'All shifts have been deleted',
+                request: {
+                    type: 'POST', 
+                    url: 'https://dijkstras-steakhouse-restapi.herokuapp.com/shifts'
+                }
+            })
         })
         //catching any errors that might have occured from above operation
         .catch(err => {
@@ -147,6 +155,29 @@ router.delete('/:shift_id', (req, res, next) => {
                 error: err
             });
         });
+    } else {
+        //finds and deletes an shift based on the given ID
+        Shift.deleteOne({ _id: id })
+            .exec()
+            .then(result => {
+                //returning successful response
+                res.status(200).json({
+                    message: 'Shift deleted',
+                    request: {
+                        type: 'POST', 
+                        url: 'https://dijkstras-steakhouse-restapi.herokuapp.com/shifts'
+                    }
+                })
+            })
+            //catching any errors that might have occured from above operation
+            .catch(err => {
+                console.log(err);
+                //returning server error
+                res.status(500).json({
+                    error: err
+                });
+            });
+    }
 });
 
 //This is allowing the variable router to be used in other files?
