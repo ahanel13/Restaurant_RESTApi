@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');       //used for hashing passwords
 //importing Employee and Table model/schema
 const Employee = require('../models/employee');
 const Table = require('../models/table');
-
+const Order = require("../models/order");
 
 router.get('/', (req, res, next) => {
     //finding all employees because no argument was given
@@ -179,6 +179,33 @@ router.put('/:employee_id', (req, res, next) => {
         .then(result =>{
             if(updateOps["tables"]){
                 for(let i = 0; i < updateOps["tables"].length; i++){
+                    Table.findById(updateOps["tables"][i])
+                    .exec()
+                    .then(tempTable => {
+                       Order.updateOne({_id: tempTable.order_id}, {$set: {employee_id: id}})
+                       .exec()
+                       .then(order_result => {
+                           console.log(order_result);
+                           return;
+                       })
+                       //catching any errors that might have occured from above operation
+                        .catch(err => {
+                            console.log(err);
+                            //returning server error
+                            res.status(500).json({
+                                error: err
+                            });
+                        });
+                        return;
+                    })
+                    //catching any errors that might have occured from above operation
+                    .catch(err => {
+                        console.log(err);
+                        //returning server error
+                        res.status(500).json({
+                            error: err
+                        });
+                    });
                     Table.updateOne({_id: updateOps["tables"][i]}, {$set: {employee_id: id}})
                     .exec()
                     .then(table_result => {
