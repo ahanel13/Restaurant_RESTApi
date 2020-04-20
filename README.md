@@ -9,6 +9,7 @@
     * [MenuItems](#menuItems)
     * [Notifications](#notifications)
     * [Orders](#orders)
+    * [Reviews](#reviews)
     * [Shifts](#Shifts)
     * [Tables](#tables)
     * [Tips](#tips)
@@ -510,6 +511,54 @@ Request body:
 
 #### PUT Request
 Send request to /orders/{order_id}    
+Request body:
+
+#### DELETE Request  
+Request body
+
+
+
+### /reviews
+Base endpoint: https://dijkstras-steakhouse-restapi.herokuapp.com/reviews
+
+#### GET Request
+Response body:
+
+    {
+        "reviews": [
+            {
+                "question01_rating": 5,
+                "question02_rating": 5,
+                "question03_rating": 5,
+                "_id": "5e9dd550dc0e3f01faa9225b",
+                "employee_id": "5e95d72ed497d400042969b2",
+                "order_id": "5e967b70cd0dd200049ca25b",
+                "question01_reason": "N/A",
+                "question02_reason": "N/A",
+                "question03_reason": "N/A",
+                "createdAt": "2020-04-20T17:01:04.566Z",
+                "updatedAt": "2020-04-20T17:01:04.566Z",
+                "__v": 0
+            }
+        ]
+    }
+
+#### POST Request
+Request body:
+    
+    {
+	    "order_id":"5e967b70cd0dd200049ca25b",
+	    "employee_id":"5e95d72ed497d400042969b2",
+	    "question01_rating":"5",
+	    "question01_reason":"N/A",
+	    "question02_rating":"5",
+	    "question02_reason":"N/A",
+	    "question03_rating":"5",
+	    "question03_reason":"N/A"
+    }
+
+#### PUT Request
+Send request to /reviews/{review_id}    
 Request body:
 
 #### DELETE Request  
