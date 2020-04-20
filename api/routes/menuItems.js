@@ -69,7 +69,7 @@ router.get('/:menuitem_id', (req, res, next) => {
                         prepared: menuItem.prepared,
                         paid: menuItem.paid,
                         special_instruct: menuItem.instruct,
-                        ingredients: menuItems.ingredients,
+                        ingredients: menuItem.ingredients,
                         picture: menuItem.picture.toString('ascii')
                     }
                 })
